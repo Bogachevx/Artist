@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/res">
+        <file>icons/brushpencil.ico</file>
+        <file>icons/camera.ico</file>
+        <file>icons/check.ico</file>
+        <file>icons/denied.ico</file>
+        <file>icons/download.ico</file>
+        <file>icons/gear.ico</file>
+        <file>icons/icon.jpg</file>
+        <file>icons/magnifyingglass.ico</file>
+        <file>icons/paintbrush2.ico</file>
+        <file>icons/pin2.ico</file>
+        <file>icons/play.ico</file>
+        <file>icons/power.ico</file>
+        <file>icons/stop.ico</file>
+        <file>icons/upload.ico</file>
+        <file>icons/x.ico</file>
+    </qresource>
+</RCC>
