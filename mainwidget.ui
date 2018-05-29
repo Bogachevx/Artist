@@ -7,15 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>900</width>
-    <height>618</height>
+    <height>702</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Artist</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>:/res/icon.jpg</normaloff>:/res/icon.jpg</iconset>
+   <iconset resource="resources.qrc">
+    <normaloff>:/res/icons/flash.ico</normaloff>:/res/icons/flash.ico</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 255, 255);</string>
@@ -180,7 +180,7 @@
      <x>90</x>
      <y>10</y>
      <width>800</width>
-     <height>600</height>
+     <height>681</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -240,8 +240,8 @@
    <slot>ButtonCaptureClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>52</x>
-     <y>206</y>
+     <x>53</x>
+     <y>286</y>
     </hint>
     <hint type="destinationlabel">
      <x>81</x>
@@ -256,8 +256,8 @@
    <slot>ButtonDrawClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>42</x>
-     <y>275</y>
+     <x>43</x>
+     <y>380</y>
     </hint>
     <hint type="destinationlabel">
      <x>81</x>

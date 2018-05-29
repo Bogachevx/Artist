@@ -9,17 +9,13 @@ MainWidget::MainWidget(QWidget *parent) :
     LoadSettings();
     isStarted = false;
     isCaptured = false;
-    Frame = nullptr;
+    //Frame = nullptr;
 
     QDesktopWidget *d = QApplication::desktop();
     int cur_x = d->width();     // returns desktop width
     int cur_y = d->height();    // returns desktop height
-    qDebug() << cur_x;
-    qDebug() << cur_y;
     int sizew = cur_x - ui->ImageView->x() - 5;
     int sizeh = cur_y - ui->ImageView->y() - 5;
-    qDebug() << sizew;
-    qDebug() << sizeh;
     ui->ImageView->resize(sizew, sizeh);
 }
 
@@ -30,7 +26,6 @@ MainWidget::~MainWidget()
 
 void MainWidget::LoadSettings()
 {
-
     std::ifstream fin("settings.dat");
     fin >> ProgramSettings.cameraAddress >>
             ProgramSettings.cameraResolution.Width >>
@@ -52,41 +47,71 @@ void MainWidget::LoadSettings()
 cv::Rect MainWidget::getROIRect(cv::Mat *frame)
 {
 
-    cv::Point RectPoint1(frame->cols/2, frame->rows/2);
+    cv::Point RectPoint1((int)(frame->cols/2), (int)(frame->rows/2));
     RectPoint1.x -= ProgramSettings.activeRegionSize.Width/2;
     RectPoint1.y -= ProgramSettings.activeRegionSize.Height/2;
     cv::Point RectPoint2;
     RectPoint2.x = RectPoint1.x + ProgramSettings.activeRegionSize.Width;
     RectPoint2.y = RectPoint1.y + ProgramSettings.activeRegionSize.Height;
+
+    RectPoint1.x =(RectPoint1.x/20)*20;
+    RectPoint1.y =(RectPoint1.y/20)*20;
+    RectPoint2.x =(RectPoint2.x/20)*20;
+    RectPoint2.y =(RectPoint2.y/20)*20;
+
     return cv::Rect(RectPoint1, RectPoint2);
 }
 
 void MainWidget::ProcessImage()
 {
 
-    cv::Mat temp(*Frame, getROIRect(Frame));
+    cv::Mat temp(Frame, getROIRect(&Frame));
     cv::Mat ROI = temp.clone();
     std::vector<std::vector<cv::Point>> contours;
+
+    double scaleX = (double)ProgramSettings.paperSize.Width/ ROI.cols;
+    double scaleY = (double)ProgramSettings.paperSize.Height/ ROI.rows;
+    double scale;
+    if (scaleX < 1 || scaleY < 1)
+    {
+        scale = (scaleX < scaleY) ? scaleX : scaleY;
+        qDebug() << "Scale" << scale;
+    }
+
     cv::cvtColor(ROI, ROI, CV_BGR2GRAY);
     cv::medianBlur(ROI, ROI, ProgramSettings.blurValue);
-    //cv::bilateralFilter(ROI, ROI, ProgramSettings.blurValue, ProgramSettings.blurValue*2, ProgramSettings.blurValue/2);
     cv::Canny(ROI, ROI, ProgramSettings.processSettings.Threshold1,  ProgramSettings.processSettings.Threshold2);
     cv::findContours(ROI, contours, CV_RETR_TREE, CV_CHAIN_APPROX_NONE);
     cv::cvtColor(ROI, ROI, CV_GRAY2RGB);
+
     ROI = ROI*0;
+    int previewSizew = (ProgramSettings.paperSize.Width/20)*20;
+    int previewSizeh = (ProgramSettings.paperSize.Height/20)*20;
+
+    cv::Mat ROIScaled = cv::Mat::zeros(cv::Size(previewSizew, previewSizeh), CV_8UC3);
     for (uint i = 0; i < contours.size(); i++)
     {
-        //cv::approxPolyDP(contours[i], contours[i], ProgramSettings.approxSize/100.0, true);
-        qDebug() << "ApproxSize" << ProgramSettings.approxSize/100.0;
         cv::approxPolyDP(contours[i], contours[i], ProgramSettings.approxSize/100.0, true);
         if (contours[i].size() >= ProgramSettings.minContLen)
         {
             cv::drawContours(ROI, contours, i, cv::Scalar(255,255,255));
+
+            for (int j = 0; j < contours[i].size(); j++)
+            {
+                contours[i][j] *= scale;
+            }
+            cv::drawContours(ROIScaled, contours, i, cv::Scalar(255,255,255));
         }
     }
+
     Contours = contours;
     ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) ROI.data,
                 ROI.cols, ROI.rows, QImage::Format_RGB888)));
+
+    Preview *preview = new Preview();
+    preview->setImage(ROIScaled);
+    preview->show();
+    //preview->setImageSize(ROIScaled.size());
 }
 
 void MainWidget::ButtonCaptureClicked()
@@ -157,7 +182,6 @@ void MainWidget::ButtonSettingsClicked()
 
 void MainWidget::ButtonDrawClicked()
 {
-
     qDebug() << "ButtonDrawClicked";
     PointsMap pm(Contours);
 }
@@ -171,7 +195,10 @@ void MainWidget::SettingsApplied(SettingsStruct settings)
 
 void MainWidget::FrameReady(cv::Mat *frame, cv::Mat *orig)
 {
-    Frame = orig;
+    //cv::Mat temp = orig->clone();
+    //orig->copyTo(*Frame);
+    //orig->copyTo(Frame);
+    Frame = orig->clone();
     cv::cvtColor(*frame, *frame, CV_BGR2RGB);
     ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) frame->data,
                                                        frame->cols, frame->rows, QImage::Format_RGB888)));
@@ -179,7 +206,7 @@ void MainWidget::FrameReady(cv::Mat *frame, cv::Mat *orig)
 
 void MainWidget::Update(int *thresh1, int *thresh2, int *blur, int *as, int *mcl)
 {
-    if (Frame != nullptr)
+    if (isCaptured)
     {
         qDebug() << "Updated";
 

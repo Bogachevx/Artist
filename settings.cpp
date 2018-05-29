@@ -7,8 +7,8 @@ Settings::Settings(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowFlags(Qt::Window
-    | Qt::WindowMinimizeButtonHint
-                   | Qt::WindowMaximizeButtonHint);
+    | Qt::WindowMinimizeButtonHint);
+    this->setFixedSize(this->size());
 }
 
 void Settings::LoadSettings(SettingsStruct settings)
@@ -73,14 +73,11 @@ void Settings::SaveSettings(SettingsStruct settings)
             settings.blurValue << std::endl <<
             settings.approxSize << std::endl <<
             settings.minContLen << std::endl;
-    qDebug() << "SettingsSaved";
     fout.close();
 }
 
 void Settings::Update()
 {
-    qDebug() << "Updated values";
-    //ApplySettings();
     int thresh1 = ui->Threshold1->value();
     int thresh2 = ui->Threshold2->value();
     int blur = ui->BlurValue->currentText().toInt();

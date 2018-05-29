@@ -10,6 +10,7 @@
 #include <opencv2/highgui.hpp>
 
 #include "camerathread.h"
+#include "preview.h"
 #include "structs.h"
 #include "settings.h"
 #include "pointsmap.h"
@@ -31,7 +32,7 @@ private:
     SettingsStruct ProgramSettings;
     Settings *SettingsWindow;
     CameraThread *camera;
-    cv::Mat *Frame;
+    cv::Mat Frame;
     std::vector<std::vector<cv::Point>> Contours;
     bool isStarted;
     bool isCaptured;

@@ -13,12 +13,18 @@
     <height>446</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Settings</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>:/res/icon.jpg</normaloff>:/res/icon.jpg</iconset>
+   <iconset resource="resources.qrc">
+    <normaloff>:/res/icons/flash.ico</normaloff>:/res/icons/flash.ico</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 255, 255);</string>

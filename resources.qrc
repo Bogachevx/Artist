@@ -6,7 +6,6 @@
         <file>icons/denied.ico</file>
         <file>icons/download.ico</file>
         <file>icons/gear.ico</file>
-        <file>icons/icon.jpg</file>
         <file>icons/magnifyingglass.ico</file>
         <file>icons/paintbrush2.ico</file>
         <file>icons/pin2.ico</file>
@@ -15,5 +14,6 @@
         <file>icons/stop.ico</file>
         <file>icons/upload.ico</file>
         <file>icons/x.ico</file>
+        <file>icons/flash.ico</file>
     </qresource>
 </RCC>
