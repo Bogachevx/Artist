@@ -1,0 +1,13 @@
+INPUT(
+./debug\main.o
+./debug\mainwidget.o
+./debug\settings.o
+./debug\camerathread.o
+./debug\pointsmap.o
+./debug\preview.o
+./debug\qrc_resources.o
+./debug\moc_mainwidget.o
+./debug\moc_settings.o
+./debug\moc_camerathread.o
+./debug\moc_preview.o
+);

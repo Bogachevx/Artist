@@ -36,7 +36,6 @@ void Settings::LoadSettings(SettingsStruct settings)
     ui->MinContLen->setValue(settings.minContLen);
     ui->label_12->setText(QString::number(ui->ApproxEpsilon->value()/100.0));
     SavedSettings = settings;
-    qDebug() << "SettingsLoadedOnForm";
 }
 
 Settings::~Settings()
@@ -55,12 +54,12 @@ void Settings::ApplySettings()
                             ui->MinContLen->value());
     emit Apply(settings);
     SaveSettings(settings);
-    qDebug() << "SettingsAppliedSignal";
 }
 
 void Settings::SaveSettings(SettingsStruct settings)
 {
     std::ofstream fout("settings.dat");
+
     fout << settings.cameraAddress << std::endl <<
             settings.cameraResolution.Width << std::endl <<
             settings.cameraResolution.Height << std::endl <<
@@ -88,7 +87,6 @@ void Settings::Update()
 
 void Settings::ButtonApplyClicked()
 {
-    qDebug() << "ApplyButtonClicked";
     ApplySettings();
     this->disconnect();
     close();

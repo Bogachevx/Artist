@@ -10,13 +10,11 @@ void CameraThread::run()
     stopWorking = false;
     cv::Mat *frame = new cv::Mat();
     cv::Mat *orig = new cv::Mat();
-    qDebug() << "Camera thread runned";
 
     while(!stopWorking)
     {
         if (!Camera->read(*frame))
         {
-            qDebug() << "Error in camera capturing";
             emit Error();
             break;
         }
@@ -28,7 +26,6 @@ void CameraThread::run()
     {
         Camera->release();
     }
-    qDebug() << "Camera thread stopped";
 }
 
 void CameraThread::stop()

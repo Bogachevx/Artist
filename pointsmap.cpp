@@ -13,7 +13,7 @@ PointsMap::PointsMap(std::vector<std::vector<cv::Point>> cont)
         addPoint(Contours[i][Contours[i].size()-1], true);
     }
     udpSocket = new QUdpSocket();
-
+    //UDP_Send(Contours.s);
     for (uint i = 0; i < Points.size(); i++)
     {
         UDP_Send(Points[i].toUtf8());

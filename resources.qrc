@@ -15,5 +15,6 @@
         <file>icons/upload.ico</file>
         <file>icons/x.ico</file>
         <file>icons/flash.ico</file>
+        <file>icons/magicwand.ico</file>
     </qresource>
 </RCC>

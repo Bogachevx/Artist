@@ -34,6 +34,7 @@ private:
     CameraThread *camera;
     cv::Mat Frame;
     std::vector<std::vector<cv::Point>> Contours;
+    Preview *preview;
     bool isStarted;
     bool isCaptured;
     void LoadSettings();
