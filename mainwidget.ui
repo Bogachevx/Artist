@@ -134,6 +134,9 @@
     </item>
     <item>
      <widget class="QPushButton" name="ButtonAutodraw">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -153,7 +156,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="ButtonLoad">
+     <widget class="QPushButton" name="ButtonSaveLoad">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="text">
        <string/>
       </property>

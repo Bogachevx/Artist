@@ -15,6 +15,7 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -23,18 +24,23 @@ class Ui_Preview
 {
 public:
     QLabel *PreviewImage;
+    QProgressBar *drawProgress;
 
     void setupUi(QWidget *Preview)
     {
         if (Preview->objectName().isEmpty())
             Preview->setObjectName(QStringLiteral("Preview"));
-        Preview->resize(400, 300);
+        Preview->resize(400, 340);
         QIcon icon;
         icon.addFile(QStringLiteral(":/res/icons/flash.ico"), QSize(), QIcon::Normal, QIcon::Off);
         Preview->setWindowIcon(icon);
         PreviewImage = new QLabel(Preview);
         PreviewImage->setObjectName(QStringLiteral("PreviewImage"));
         PreviewImage->setGeometry(QRect(0, 0, 271, 251));
+        drawProgress = new QProgressBar(Preview);
+        drawProgress->setObjectName(QStringLiteral("drawProgress"));
+        drawProgress->setGeometry(QRect(10, 310, 151, 23));
+        drawProgress->setValue(24);
 
         retranslateUi(Preview);
 

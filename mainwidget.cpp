@@ -9,7 +9,12 @@ MainWidget::MainWidget(QWidget *parent) :
     LoadSettings();
     isStarted = false;
     isCaptured = false;
-    preview = nullptr;
+    udpSocket = new QUdpSocket();
+    udpRecvSocket = new QUdpSocket();
+    udpRecvSocket->bind(49153, QUdpSocket::ShareAddress);
+    connect(udpRecvSocket, SIGNAL(readyRead()),
+            this, SLOT(processPendingDatagrams()));
+    recievedData = "";
 
     QDesktopWidget *d = QApplication::desktop();
     int cur_x = d->width();     // returns desktop width
@@ -75,16 +80,16 @@ void MainWidget::ProcessImage()
     cv::Mat temp(Frame, getROIRect(&Frame));
     cv::Mat ROI = temp.clone();
     std::vector<std::vector<cv::Point>> contours;
-
+    std::vector<std::vector<cv::Point>> smallcontours;
     double scaleX = (double)ProgramSettings.paperSize.Width/ ROI.cols;
     double scaleY = (double)ProgramSettings.paperSize.Height/ ROI.rows;
-    double scale = 1;
+    double scale = 0;
 
-    if (scaleX <= 1 || scaleY <= 1)
+    if (scaleX < 1 || scaleY < 1)
     {
         scale = (scaleX < scaleY) ? scaleX : scaleY;
     }
-
+    qDebug() << scale;
     cv::cvtColor(ROI, ROI, CV_BGR2GRAY);
     cv::medianBlur(ROI, ROI, ProgramSettings.blurValue);
     cv::Canny(ROI, ROI, ProgramSettings.processSettings.Threshold1,  ProgramSettings.processSettings.Threshold2);
@@ -94,7 +99,7 @@ void MainWidget::ProcessImage()
     ROI = ROI*0;
     int previewSizew = (ProgramSettings.paperSize.Width/20)*20;
     int previewSizeh = (ProgramSettings.paperSize.Height/20)*20;
-
+    //contours = contours;
     cv::Mat ROIScaled = cv::Mat::zeros(cv::Size(previewSizew, previewSizeh), CV_8UC3);
     for (uint i = 0; i < contours.size(); i++)
     {
@@ -105,14 +110,44 @@ void MainWidget::ProcessImage()
 
             for (uint j = 0; j < contours[i].size(); j++)
             {
-                contours[i][j].x *= scale;
-                contours[i][j].y *= scale;
+                contours[i][j].x = (int)((double)contours[i][j].x * scale);
+                contours[i][j].y = (int)((double)contours[i][j].y * scale);
+
+                //contours[i][j].x *= scale;
+                //contours[i][j].y *= scale;
             }
+            std::vector<cv::Point> temp;
+            for (int t = 0; t < contours[i].size()/2; t++)
+            {
+                temp.push_back(contours[i][t]);
+            }
+            smallcontours.push_back(contours[i]);
             cv::drawContours(ROIScaled, contours, i, cv::Scalar(255,255,255));
+            /*
+            for (uint j = 0; j < contours[i].size(); j++)
+            {
+                contours[i][j].x = (int)((double)contours[i][j].x * scale);
+                contours[i][j].y = (int)((double)contours[i][j].y * scale);
+
+                //contours[i][j].x *= scale;
+                //contours[i][j].y *= scale;
+            }
+            //smallcontours.push_back(contours[i]);
+            */
         }
+        /*for (uint j = 0; j < contours[i].size(); j++)
+        {
+            contours[i][j].x = (int)((double)contours[i][j].x * scale);
+            contours[i][j].y = (int)((double)contours[i][j].y * scale);
+
+            //contours[i][j].x *= scale;
+            //contours[i][j].y *= scale;
+        }
+        cv::drawContours(ROIScaled, contours, i, cv::Scalar(255,255,255));
+        */
     }
 
-    Contours = contours;
+    Contours = smallcontours;
     ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) ROI.data,
                 ROI.cols, ROI.rows, QImage::Format_RGB888)));
 
@@ -129,10 +164,17 @@ void MainWidget::ProcessImage()
     */
 }
 
+void MainWidget::UDP_Send(QByteArray datagram)
+{
+    udpSocket->writeDatagram(datagram, QHostAddress::Broadcast, 49152);
+    QThread::msleep(50);
+}
+
 void MainWidget::ButtonCaptureClicked()
 {
     isCaptured = true;
     ButtonStartStopClicked();
+    cv::imwrite("cap.jpg", Frame);
     ProcessImage();
     ui->ButtonDraw->setEnabled(true);
 }
@@ -141,7 +183,11 @@ void MainWidget::ButtonStartStopClicked()
 {    
     if (!isStarted)
     {
+        UDP_Send(QByteArray::number(-1));
+
         isCaptured = false;
+        isDrawing = false;
+
         camera = new CameraThread(ProgramSettings.cameraAddress);
         connect(camera, SIGNAL(Ready(cv::Mat * ,cv::Mat *)), this, SLOT(FrameReady(cv::Mat * ,cv::Mat *)));
         connect(camera, SIGNAL(Error()), this, SLOT(Error()));
@@ -156,6 +202,7 @@ void MainWidget::ButtonStartStopClicked()
     }
     else
     {
+        UDP_Send(QByteArray::number(-2));
         disconnect(camera, SIGNAL(Ready(cv::Mat * ,cv::Mat *)), this, SLOT(FrameReady(cv::Mat * ,cv::Mat *)));
         disconnect(camera, SIGNAL(Error()), this, SLOT(Error()));
 
@@ -192,7 +239,57 @@ void MainWidget::ButtonSettingsClicked()
 
 void MainWidget::ButtonDrawClicked()
 {
-    PointsMap pm(Contours);
+    //if (!isDrawing)
+    //{
+        dp = new DrawProcess();
+        connect(dp, SIGNAL(cancelButtonClicked()), this, SLOT(cancelDrawButtonClicked()));
+        UDP_Send(QByteArray::number(-3));
+        pointsSender = new PointsSender(Contours);
+        pointsSender->start();
+        connect(pointsSender, SIGNAL(sendPercent(int)), dp, SLOT(setProgressBarValue(int)));
+        connect(dp, SIGNAL(cancelButtonClicked()), this, SLOT(cancelDrawButtonClicked()));
+        dp->show();
+        isDrawing = true;
+    //}
+    //else
+    //{
+    //    pointsSender->stop();
+    //    UDP_Send(QByteArray::number(-10));
+    //    ui->ButtonDraw->setIcon(QIcon(":res/icons/paintbrush2.ico"));
+
+    //    isDrawing = false;
+        //}
+}
+
+void MainWidget::cancelDrawButtonClicked()
+{
+    pointsSender->stop();
+    dp->close();
+    QThread::msleep(100);
+    delete(dp);
+    delete(pointsSender);   
+    UDP_Send(QByteArray::number(-10));
+
+}
+
+void MainWidget::processPendingDatagrams()
+{
+    QByteArray datagram;
+    while (udpRecvSocket->hasPendingDatagrams()) {
+        datagram.resize(int(udpRecvSocket->pendingDatagramSize()));
+        udpRecvSocket->readDatagram(datagram.data(), datagram.size());
+        QString recvData;
+        recvData = datagram.constData();
+        qDebug() << recvData;
+        //if (recvData == "5")
+        {
+            recievedData = "q";
+        }
+        //udpRecvSocket->
+        //recievedData = datagram.constData();
+        //statusLabel->setText(statusLabel->text() + tr("Received datagram: \"%1\"")
+        //                     .arg(datagram.constData()));
+    }
 }
 
 void MainWidget::SettingsApplied(SettingsStruct settings)
@@ -206,8 +303,13 @@ void MainWidget::FrameReady(cv::Mat *frame, cv::Mat *orig)
 
     Frame = orig->clone();
     cv::cvtColor(*frame, *frame, CV_BGR2RGB);
-    ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) frame->data,
+
+    if (!isCaptured)
+    {
+        ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) frame->data,
                                                        frame->cols, frame->rows, QImage::Format_RGB888)));
+
+    }
 }
 
 void MainWidget::Update(int *thresh1, int *thresh2, int *blur, int *as, int *mcl)

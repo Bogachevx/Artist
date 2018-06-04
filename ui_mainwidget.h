@@ -33,7 +33,7 @@ public:
     QPushButton *ButtonDraw;
     QFrame *line;
     QPushButton *ButtonAutodraw;
-    QPushButton *ButtonLoad;
+    QPushButton *ButtonSaveLoad;
     QPushButton *ButtonQuit;
     QLabel *ImageView;
 
@@ -105,6 +105,7 @@ public:
 
         ButtonAutodraw = new QPushButton(verticalLayoutWidget);
         ButtonAutodraw->setObjectName(QStringLiteral("ButtonAutodraw"));
+        ButtonAutodraw->setEnabled(false);
         QIcon icon5;
         icon5.addFile(QStringLiteral(":/res/icons/magicwand.ico"), QSize(), QIcon::Normal, QIcon::Off);
         ButtonAutodraw->setIcon(icon5);
@@ -113,15 +114,16 @@ public:
 
         verticalLayout->addWidget(ButtonAutodraw);
 
-        ButtonLoad = new QPushButton(verticalLayoutWidget);
-        ButtonLoad->setObjectName(QStringLiteral("ButtonLoad"));
+        ButtonSaveLoad = new QPushButton(verticalLayoutWidget);
+        ButtonSaveLoad->setObjectName(QStringLiteral("ButtonSaveLoad"));
+        ButtonSaveLoad->setEnabled(false);
         QIcon icon6;
         icon6.addFile(QStringLiteral(":/res/icons/upload.ico"), QSize(), QIcon::Normal, QIcon::Off);
-        ButtonLoad->setIcon(icon6);
-        ButtonLoad->setIconSize(QSize(64, 64));
-        ButtonLoad->setFlat(true);
+        ButtonSaveLoad->setIcon(icon6);
+        ButtonSaveLoad->setIconSize(QSize(64, 64));
+        ButtonSaveLoad->setFlat(true);
 
-        verticalLayout->addWidget(ButtonLoad);
+        verticalLayout->addWidget(ButtonSaveLoad);
 
         ButtonQuit = new QPushButton(verticalLayoutWidget);
         ButtonQuit->setObjectName(QStringLiteral("ButtonQuit"));
@@ -158,7 +160,7 @@ public:
         ButtonCapture->setText(QString());
         ButtonDraw->setText(QString());
         ButtonAutodraw->setText(QString());
-        ButtonLoad->setText(QString());
+        ButtonSaveLoad->setText(QString());
         ButtonQuit->setText(QString());
         ImageView->setText(QString());
     } // retranslateUi

@@ -3,8 +3,8 @@
 IDI_ICON1	ICON	DISCARDABLE	"C:\\Projects\\FaceDraw\\icons\\flash.ico"
 
 VS_VERSION_INFO VERSIONINFO
-	FILEVERSION 0,0,0,0
-	PRODUCTVERSION 0,0,0,0
+	FILEVERSION 1,0,0,0
+	PRODUCTVERSION 1,0,0,0
 	FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
 	FILEFLAGS VS_FF_DEBUG
@@ -19,13 +19,13 @@ VS_VERSION_INFO VERSIONINFO
 		BEGIN
 			BLOCK "040904b0"
 			BEGIN
-				VALUE "CompanyName", "\0"
-				VALUE "FileDescription", "\0"
-				VALUE "FileVersion", "0.0.0.0\0"
-				VALUE "LegalCopyright", "\0"
+				VALUE "CompanyName", "Robowizard\0"
+				VALUE "FileDescription", "PC program for painting by using Kawasaki robots\0"
+				VALUE "FileVersion", "1.0.0.0\0"
+				VALUE "LegalCopyright", "Bogachev Dmitrii\0"
 				VALUE "OriginalFilename", "FaceDraw.exe\0"
-				VALUE "ProductName", "FaceDraw\0"
-				VALUE "ProductVersion", "0.0.0.0\0"
+				VALUE "ProductName", "Painter\0"
+				VALUE "ProductVersion", "1.0.0.0\0"
 			END
 		END
 		BLOCK "VarFileInfo"
