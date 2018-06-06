@@ -138,7 +138,7 @@ public:
         ImageView = new QLabel(MainWidget);
         ImageView->setObjectName(QStringLiteral("ImageView"));
         ImageView->setGeometry(QRect(90, 10, 800, 681));
-        ImageView->setStyleSheet(QStringLiteral("background-color: rgb(79, 93, 115);"));
+        ImageView->setStyleSheet(QStringLiteral("background-color: rgb(157, 42, 52);"));
         ImageView->setScaledContents(false);
         ImageView->setAlignment(Qt::AlignCenter);
 

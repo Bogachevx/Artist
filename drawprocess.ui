@@ -16,17 +16,20 @@
   <property name="windowTitle">
    <string>Sending...</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 255, 255);</string>
+  </property>
   <widget class="QProgressBar" name="sendingProgress">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>30</y>
-     <width>300</width>
+     <width>291</width>
      <height>23</height>
     </rect>
    </property>
    <property name="value">
-    <number>0</number>
+    <number>45</number>
    </property>
   </widget>
   <widget class="QLabel" name="label">

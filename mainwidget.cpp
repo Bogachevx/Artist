@@ -145,49 +145,18 @@ void MainWidget::ProcessImage()
             }
             smallcontours.push_back(contours[i]);
             cv::drawContours(ROIScaled, contours, i, cv::Scalar(255,255,255));
-            /*
-            for (uint j = 0; j < contours[i].size(); j++)
-            {
-                contours[i][j].x = (int)((double)contours[i][j].x * scale);
-                contours[i][j].y = (int)((double)contours[i][j].y * scale);
-
-                //contours[i][j].x *= scale;
-                //contours[i][j].y *= scale;
-            }
-            //smallcontours.push_back(contours[i]);
-            */
         }
-        /*for (uint j = 0; j < contours[i].size(); j++)
-        {
-            contours[i][j].x = (int)((double)contours[i][j].x * scale);
-            contours[i][j].y = (int)((double)contours[i][j].y * scale);
-
-            //contours[i][j].x *= scale;
-            //contours[i][j].y *= scale;
-        }
-        cv::drawContours(ROIScaled, contours, i, cv::Scalar(255,255,255));
-        */
     }
 
     Contours = smallcontours;
     qDebug() << 6;
-    cv::namedWindow("test", CV_WINDOW_FREERATIO);
-    cv::imshow("test", ROI);
+    //cv::namedWindow("test", CV_WINDOW_FREERATIO);
+    //cv::imshow("test", ROI);
     //cv::setWindowProperty("test", CV_WINDOW_FREERATIO, 1);
-    //ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) ROI.data,
-    //            ROI.cols, ROI.rows, QImage::Format_RGB888)));
+    ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) ROI.data,
+                ROI.cols, ROI.rows, QImage::Format_RGB888)));
     qDebug() << 7;
-    /*
-    if (preview != nullptr)
-    {
-        preview->close();
-        delete(preview);
-        preview = nullptr;
-    }
-    preview = new Preview();
-    preview->setImage(ROIScaled);
-    preview->show();
-    */
+
 }
 
 void MainWidget::UDP_Send(QByteArray datagram)
@@ -213,6 +182,7 @@ void MainWidget::ButtonStartStopClicked()
 
         isCaptured = false;
         isDrawing = false;
+        drawPhoto = false;
 
         camera = new CameraThread(ProgramSettings.cameraAddress);
         connect(camera, SIGNAL(Ready(cv::Mat * ,cv::Mat *)), this, SLOT(FrameReady(cv::Mat * ,cv::Mat *)));
@@ -253,7 +223,7 @@ void MainWidget::ButtonSettingsClicked()
     SettingsWindow->move(0,0);
     connect(SettingsWindow, SIGNAL(Apply(SettingsStruct)),
             this, SLOT(SettingsApplied(SettingsStruct)));
-    if (!isStarted && isCaptured)
+    if ((!isStarted && isCaptured) || drawPhoto)
     {
         connect(SettingsWindow, SIGNAL(EmitUpdate(int*,int*,int*,int*,int*)), this, SLOT(Update(int*,int*,int*,int*,int*)));
     }

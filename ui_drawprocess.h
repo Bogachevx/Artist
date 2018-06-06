@@ -34,10 +34,11 @@ public:
             DrawProcess->setObjectName(QStringLiteral("DrawProcess"));
         DrawProcess->setWindowModality(Qt::ApplicationModal);
         DrawProcess->resize(310, 157);
+        DrawProcess->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
         sendingProgress = new QProgressBar(DrawProcess);
         sendingProgress->setObjectName(QStringLiteral("sendingProgress"));
-        sendingProgress->setGeometry(QRect(10, 30, 300, 23));
-        sendingProgress->setValue(0);
+        sendingProgress->setGeometry(QRect(10, 30, 291, 23));
+        sendingProgress->setValue(45);
         label = new QLabel(DrawProcess);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(10, 10, 61, 16));
