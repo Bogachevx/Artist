@@ -62,6 +62,7 @@ private slots:
     void ButtonLoadClicked();
     void cancelDrawButtonClicked();
     void processPendingDatagrams();
+    QPixmap convertMatToQPixmap(cv::Mat img);
     void SettingsApplied(SettingsStruct settings);
     void FrameReady(cv::Mat *frame, cv::Mat *orig);
     void Update( int*, int*, int*, int*, int*);

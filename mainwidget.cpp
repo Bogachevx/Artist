@@ -153,10 +153,10 @@ void MainWidget::ProcessImage()
     //cv::namedWindow("test", CV_WINDOW_FREERATIO);
     //cv::imshow("test", ROI);
     //cv::setWindowProperty("test", CV_WINDOW_FREERATIO, 1);
-    ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) ROI.data,
-                ROI.cols, ROI.rows, QImage::Format_RGB888)));
+    //ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) ROI.data,
+    //            ROI.cols, ROI.rows, QImage::Format_RGB888)));
+    ui->ImageView->setPixmap(convertMatToQPixmap(ROI));
     qDebug() << 7;
-
 }
 
 void MainWidget::UDP_Send(QByteArray datagram)
@@ -304,6 +304,39 @@ void MainWidget::processPendingDatagrams()
         //recievedData = datagram.constData();
         //statusLabel->setText(statusLabel->text() + tr("Received datagram: \"%1\"")
         //                     .arg(datagram.constData()));
+    }
+}
+
+QPixmap MainWidget::convertMatToQPixmap(cv::Mat mat)
+{
+
+    QPixmap pixmap;
+    if(mat.type()==CV_8UC1)
+    {
+        // Set the color table (used to translate colour indexes to qRgb values)
+        QVector<QRgb> colorTable;
+        for (int i=0; i<256; i++)
+            colorTable.push_back(qRgb(i,i,i));
+        // Copy input Mat
+        const uchar *qImageBuffer = (const uchar*)mat.data;
+        // Create QImage with same dimensions as input Mat
+        QImage img(qImageBuffer, mat.cols, mat.rows, mat.step, QImage::Format_Indexed8);
+        img.setColorTable(colorTable);
+        pixmap = QPixmap::fromImage(img);
+    }
+    // 8-bits unsigned, NO. OF CHANNELS=3
+    if(mat.type()==CV_8UC3)
+    {
+        // Copy input Mat
+        const uchar *qImageBuffer = (const uchar*)mat.data;
+        // Create QImage with same dimensions as input Mat
+        QImage img(qImageBuffer, mat.cols, mat.rows, mat.step, QImage::Format_RGB888);
+        pixmap = QPixmap::fromImage(img.rgbSwapped());
+    }
+    else
+    {
+        qDebug() << "ERROR: Mat could not be converted to QImage or QPixmap.";
+        return QPixmap();
     }
 }
 

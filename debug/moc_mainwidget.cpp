@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWidget_t {
-    QByteArrayData data[19];
-    char stringdata0[251];
+    QByteArrayData data[22];
+    char stringdata0[283];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,22 +40,26 @@ QT_MOC_LITERAL(5, 78, 17), // "ButtonDrawClicked"
 QT_MOC_LITERAL(6, 96, 17), // "ButtonLoadClicked"
 QT_MOC_LITERAL(7, 114, 23), // "cancelDrawButtonClicked"
 QT_MOC_LITERAL(8, 138, 23), // "processPendingDatagrams"
-QT_MOC_LITERAL(9, 162, 15), // "SettingsApplied"
-QT_MOC_LITERAL(10, 178, 14), // "SettingsStruct"
-QT_MOC_LITERAL(11, 193, 8), // "settings"
-QT_MOC_LITERAL(12, 202, 10), // "FrameReady"
-QT_MOC_LITERAL(13, 213, 8), // "cv::Mat*"
-QT_MOC_LITERAL(14, 222, 5), // "frame"
-QT_MOC_LITERAL(15, 228, 4), // "orig"
-QT_MOC_LITERAL(16, 233, 6), // "Update"
-QT_MOC_LITERAL(17, 240, 4), // "int*"
-QT_MOC_LITERAL(18, 245, 5) // "Error"
+QT_MOC_LITERAL(9, 162, 19), // "convertMatToQPixmap"
+QT_MOC_LITERAL(10, 182, 7), // "cv::Mat"
+QT_MOC_LITERAL(11, 190, 3), // "img"
+QT_MOC_LITERAL(12, 194, 15), // "SettingsApplied"
+QT_MOC_LITERAL(13, 210, 14), // "SettingsStruct"
+QT_MOC_LITERAL(14, 225, 8), // "settings"
+QT_MOC_LITERAL(15, 234, 10), // "FrameReady"
+QT_MOC_LITERAL(16, 245, 8), // "cv::Mat*"
+QT_MOC_LITERAL(17, 254, 5), // "frame"
+QT_MOC_LITERAL(18, 260, 4), // "orig"
+QT_MOC_LITERAL(19, 265, 6), // "Update"
+QT_MOC_LITERAL(20, 272, 4), // "int*"
+QT_MOC_LITERAL(21, 277, 5) // "Error"
 
     },
     "MainWidget\0ButtonCaptureClicked\0\0"
     "ButtonStartStopClicked\0ButtonSettingsClicked\0"
     "ButtonDrawClicked\0ButtonLoadClicked\0"
     "cancelDrawButtonClicked\0processPendingDatagrams\0"
+    "convertMatToQPixmap\0cv::Mat\0img\0"
     "SettingsApplied\0SettingsStruct\0settings\0"
     "FrameReady\0cv::Mat*\0frame\0orig\0Update\0"
     "int*\0Error"
@@ -68,7 +72,7 @@ static const uint qt_meta_data_MainWidget[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+      12,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -76,17 +80,18 @@ static const uint qt_meta_data_MainWidget[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   69,    2, 0x08 /* Private */,
-       3,    0,   70,    2, 0x08 /* Private */,
-       4,    0,   71,    2, 0x08 /* Private */,
-       5,    0,   72,    2, 0x08 /* Private */,
-       6,    0,   73,    2, 0x08 /* Private */,
-       7,    0,   74,    2, 0x08 /* Private */,
-       8,    0,   75,    2, 0x08 /* Private */,
-       9,    1,   76,    2, 0x08 /* Private */,
-      12,    2,   79,    2, 0x08 /* Private */,
-      16,    5,   84,    2, 0x08 /* Private */,
-      18,    0,   95,    2, 0x08 /* Private */,
+       1,    0,   74,    2, 0x08 /* Private */,
+       3,    0,   75,    2, 0x08 /* Private */,
+       4,    0,   76,    2, 0x08 /* Private */,
+       5,    0,   77,    2, 0x08 /* Private */,
+       6,    0,   78,    2, 0x08 /* Private */,
+       7,    0,   79,    2, 0x08 /* Private */,
+       8,    0,   80,    2, 0x08 /* Private */,
+       9,    1,   81,    2, 0x08 /* Private */,
+      12,    1,   84,    2, 0x08 /* Private */,
+      15,    2,   87,    2, 0x08 /* Private */,
+      19,    5,   92,    2, 0x08 /* Private */,
+      21,    0,  103,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -96,9 +101,10 @@ static const uint qt_meta_data_MainWidget[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 10,   11,
-    QMetaType::Void, 0x80000000 | 13, 0x80000000 | 13,   14,   15,
-    QMetaType::Void, 0x80000000 | 17, 0x80000000 | 17, 0x80000000 | 17, 0x80000000 | 17, 0x80000000 | 17,    2,    2,    2,    2,    2,
+    QMetaType::QPixmap, 0x80000000 | 10,   11,
+    QMetaType::Void, 0x80000000 | 13,   14,
+    QMetaType::Void, 0x80000000 | 16, 0x80000000 | 16,   17,   18,
+    QMetaType::Void, 0x80000000 | 20, 0x80000000 | 20, 0x80000000 | 20, 0x80000000 | 20, 0x80000000 | 20,    2,    2,    2,    2,    2,
     QMetaType::Void,
 
        0        // eod
@@ -117,10 +123,12 @@ void MainWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 4: _t->ButtonLoadClicked(); break;
         case 5: _t->cancelDrawButtonClicked(); break;
         case 6: _t->processPendingDatagrams(); break;
-        case 7: _t->SettingsApplied((*reinterpret_cast< SettingsStruct(*)>(_a[1]))); break;
-        case 8: _t->FrameReady((*reinterpret_cast< cv::Mat*(*)>(_a[1])),(*reinterpret_cast< cv::Mat*(*)>(_a[2]))); break;
-        case 9: _t->Update((*reinterpret_cast< int*(*)>(_a[1])),(*reinterpret_cast< int*(*)>(_a[2])),(*reinterpret_cast< int*(*)>(_a[3])),(*reinterpret_cast< int*(*)>(_a[4])),(*reinterpret_cast< int*(*)>(_a[5]))); break;
-        case 10: _t->Error(); break;
+        case 7: { QPixmap _r = _t->convertMatToQPixmap((*reinterpret_cast< cv::Mat(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QPixmap*>(_a[0]) = std::move(_r); }  break;
+        case 8: _t->SettingsApplied((*reinterpret_cast< SettingsStruct(*)>(_a[1]))); break;
+        case 9: _t->FrameReady((*reinterpret_cast< cv::Mat*(*)>(_a[1])),(*reinterpret_cast< cv::Mat*(*)>(_a[2]))); break;
+        case 10: _t->Update((*reinterpret_cast< int*(*)>(_a[1])),(*reinterpret_cast< int*(*)>(_a[2])),(*reinterpret_cast< int*(*)>(_a[3])),(*reinterpret_cast< int*(*)>(_a[4])),(*reinterpret_cast< int*(*)>(_a[5]))); break;
+        case 11: _t->Error(); break;
         default: ;
         }
     }
@@ -151,13 +159,13 @@ int MainWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 12;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 11)
+        if (_id < 12)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 11;
+        _id -= 12;
     }
     return _id;
 }

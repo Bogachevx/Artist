@@ -210,7 +210,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(157, 42, 52);</string>
+    <string notr="true">background-color: rgb(206, 30, 37);</string>
    </property>
    <property name="text">
     <string/>
@@ -220,6 +220,22 @@
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>620</x>
+     <y>20</y>
+     <width>261</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources.qrc">:/res/icons/robowizard__logo.png</pixmap>
    </property>
   </widget>
  </widget>
