@@ -76,9 +76,18 @@ cv::Rect MainWidget::getROIRect(cv::Mat *frame)
 
 void MainWidget::ProcessImage()
 {
-
-    cv::Mat temp(Frame, getROIRect(&Frame));
-    cv::Mat ROI = temp.clone();
+    cv::Mat ROI;
+    if (drawPhoto == false)
+    {
+        cv::Mat temp(Frame, getROIRect(&Frame));
+        ROI = temp.clone();
+    }
+    else
+    {
+        qDebug() << 1;
+        ROI = Frame;//.clone();
+        qDebug() << 2;
+    }
     std::vector<std::vector<cv::Point>> contours;
     std::vector<std::vector<cv::Point>> smallcontours;
     double scaleX = (double)ProgramSettings.paperSize.Width/ ROI.cols;
@@ -95,12 +104,25 @@ void MainWidget::ProcessImage()
     cv::Canny(ROI, ROI, ProgramSettings.processSettings.Threshold1,  ProgramSettings.processSettings.Threshold2);
     cv::findContours(ROI, contours, CV_RETR_TREE, CV_CHAIN_APPROX_NONE);
     cv::cvtColor(ROI, ROI, CV_GRAY2RGB);
-
+    //cv::imshow("222", ROI);
+    qDebug() << 3;
     ROI = ROI*0;
-    int previewSizew = (ProgramSettings.paperSize.Width/20)*20;
-    int previewSizeh = (ProgramSettings.paperSize.Height/20)*20;
+    int previewSizew;
+    int previewSizeh;
+    if (drawPhoto == true)
+    {
+        previewSizew = (ProgramSettings.paperSize.Width/20)*20;
+        previewSizeh = (ProgramSettings.paperSize.Height/20)*20;
+    }
+    else
+    {
+        previewSizew = (Frame.cols/20)*20;
+        previewSizeh = (Frame.rows/20)*20;
+    }
     //contours = contours;
+    qDebug() << 4;
     cv::Mat ROIScaled = cv::Mat::zeros(cv::Size(previewSizew, previewSizeh), CV_8UC3);
+    qDebug() << 5;
     for (uint i = 0; i < contours.size(); i++)
     {
         cv::approxPolyDP(contours[i], contours[i], ProgramSettings.approxSize/100.0, true);
@@ -117,7 +139,7 @@ void MainWidget::ProcessImage()
                 //contours[i][j].y *= scale;
             }
             std::vector<cv::Point> temp;
-            for (int t = 0; t < contours[i].size()/2; t++)
+            for (int t = 0; t < contours[i].size()/2+1; t++)
             {
                 temp.push_back(contours[i][t]);
             }
@@ -148,9 +170,13 @@ void MainWidget::ProcessImage()
     }
 
     Contours = smallcontours;
-    ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) ROI.data,
-                ROI.cols, ROI.rows, QImage::Format_RGB888)));
-
+    qDebug() << 6;
+    cv::namedWindow("test", CV_WINDOW_FREERATIO);
+    cv::imshow("test", ROI);
+    //cv::setWindowProperty("test", CV_WINDOW_FREERATIO, 1);
+    //ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) ROI.data,
+    //            ROI.cols, ROI.rows, QImage::Format_RGB888)));
+    qDebug() << 7;
     /*
     if (preview != nullptr)
     {
@@ -208,6 +234,8 @@ void MainWidget::ButtonStartStopClicked()
 
         camera->stop();
         camera->wait();
+        camera->exit();
+
         delete(camera);
         camera = nullptr;
 
@@ -261,10 +289,27 @@ void MainWidget::ButtonDrawClicked()
         //}
 }
 
+void MainWidget::ButtonLoadClicked()
+{
+    QString str = QFileDialog::getOpenFileName(0, "Open Dialog", "", "*.jpeg *.jpg *.png");
+    cv::Mat frame = cv::imread(str.toStdString());
+    //cv::imshow("22222", frame);
+    cv::cvtColor(frame, frame, CV_BGR2RGB);
+    //ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) Frame.data,
+    //                                                   Frame.cols, Frame.rows, QImage::Format_RGB888)));
+    drawPhoto = true;
+    //cv::imshow("22222", frame);
+    Frame = frame;
+    ProcessImage();
+    drawPhoto = false;
+    ui->ButtonDraw->setEnabled(true);
+}
+
 void MainWidget::cancelDrawButtonClicked()
 {
     pointsSender->stop();
     dp->close();
+    pointsSender->exit();
     QThread::msleep(100);
     delete(dp);
     delete(pointsSender);   
@@ -314,7 +359,7 @@ void MainWidget::FrameReady(cv::Mat *frame, cv::Mat *orig)
 
 void MainWidget::Update(int *thresh1, int *thresh2, int *blur, int *as, int *mcl)
 {
-    if (isCaptured)
+    if (!isCaptured)
     {
 
         ProgramSettings.processSettings.Threshold1 = *thresh1;

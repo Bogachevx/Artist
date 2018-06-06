@@ -116,7 +116,7 @@ public:
 
         ButtonSaveLoad = new QPushButton(verticalLayoutWidget);
         ButtonSaveLoad->setObjectName(QStringLiteral("ButtonSaveLoad"));
-        ButtonSaveLoad->setEnabled(false);
+        ButtonSaveLoad->setEnabled(true);
         QIcon icon6;
         icon6.addFile(QStringLiteral(":/res/icons/upload.ico"), QSize(), QIcon::Normal, QIcon::Off);
         ButtonSaveLoad->setIcon(icon6);
@@ -148,6 +148,7 @@ public:
         QObject::connect(ButtonCapture, SIGNAL(clicked()), MainWidget, SLOT(ButtonCaptureClicked()));
         QObject::connect(ButtonDraw, SIGNAL(clicked()), MainWidget, SLOT(ButtonDrawClicked()));
         QObject::connect(ButtonQuit, SIGNAL(clicked()), MainWidget, SLOT(close()));
+        QObject::connect(ButtonSaveLoad, SIGNAL(clicked()), MainWidget, SLOT(ButtonLoadClicked()));
 
         QMetaObject::connectSlotsByName(MainWidget);
     } // setupUi

@@ -158,7 +158,7 @@
     <item>
      <widget class="QPushButton" name="ButtonSaveLoad">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="text">
        <string/>
@@ -266,8 +266,8 @@
    <slot>ButtonCaptureClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>53</x>
-     <y>286</y>
+     <x>54</x>
+     <y>253</y>
     </hint>
     <hint type="destinationlabel">
      <x>81</x>
@@ -282,8 +282,8 @@
    <slot>ButtonDrawClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>43</x>
-     <y>380</y>
+     <x>44</x>
+     <y>336</y>
     </hint>
     <hint type="destinationlabel">
      <x>81</x>
@@ -298,12 +298,28 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>52</x>
-     <y>524</y>
+     <x>53</x>
+     <y>599</y>
     </hint>
     <hint type="destinationlabel">
      <x>55</x>
      <y>588</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ButtonSaveLoad</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWidget</receiver>
+   <slot>ButtonLoadClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>48</x>
+     <y>481</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-4</x>
+     <y>433</y>
     </hint>
    </hints>
   </connection>
@@ -313,5 +329,6 @@
   <slot>ButtonDrawClicked()</slot>
   <slot>ButtonCaptureClicked()</slot>
   <slot>ButtonStartStopClicked()</slot>
+  <slot>ButtonLoadClicked()</slot>
  </slots>
 </ui>

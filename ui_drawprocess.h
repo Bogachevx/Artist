@@ -37,7 +37,7 @@ public:
         sendingProgress = new QProgressBar(DrawProcess);
         sendingProgress->setObjectName(QStringLiteral("sendingProgress"));
         sendingProgress->setGeometry(QRect(10, 30, 300, 23));
-        sendingProgress->setValue(24);
+        sendingProgress->setValue(0);
         label = new QLabel(DrawProcess);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(10, 10, 61, 16));
