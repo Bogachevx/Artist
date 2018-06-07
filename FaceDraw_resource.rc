@@ -1,6 +1,6 @@
 #include <windows.h>
 
-IDI_ICON1	ICON	DISCARDABLE	"C:\\Projects\\FaceDraw\\icons\\flash.ico"
+IDI_ICON1	ICON	DISCARDABLE	"C:\\Users\\dmbog\\YandexDisk\\Projects\\FaceDraw\\icons\\flash.ico"
 
 VS_VERSION_INFO VERSIONINFO
 	FILEVERSION 1,0,0,0

@@ -17,20 +17,19 @@ TEMPLATE = app
 requires(qtConfig(udpsocket))
 DEFINES += QT_DEPRECATED_WARNINGS
 
-INCLUDEPATH += C:\opencv_build\install\include
+INCLUDEPATH += C:\opencv3_build\install\include
 
-LIBS += C:\\opencv_build\\bin\\libopencv_core2413.dll
-LIBS += C:\\opencv_build\\bin\\libopencv_contrib2413.dll
-LIBS += C:\\opencv_build\\bin\\libopencv_features2d2413.dll
-LIBS += C:\\opencv_build\\bin\\libopencv_flann2413.dll
-LIBS += C:\\opencv_build\\bin\\libopencv_highgui2413.dll
-LIBS += C:\\opencv_build\\bin\\libopencv_objdetect2413.dll
-LIBS += C:\\opencv_build\\bin\\libopencv_video2413.dll
-LIBS += C:\\opencv_build\\bin\\libopencv_legacy2413.dll
-LIBS += C:\\opencv_build\\bin\\libopencv_calib3d2413.dll
-LIBS += C:\\opencv_build\\bin\\libopencv_imgproc2413.dll
-LIBS += C:\\opencv_build\\bin\\libopencv_ml2413.dll
-LIBS += C:\\opencv_build\\bin\\libopencv_nonfree2413.dll
+LIBS += C:\\opencv3_build\\install\\x86\\mingw\\bin\\libopencv_core341d.dll
+LIBS += C:\\opencv3_build\\install\\x86\\mingw\\bin\\libopencv_features2d341d.dll
+LIBS += C:\\opencv3_build\\install\\x86\\mingw\\bin\\libopencv_flann341d.dll
+LIBS += C:\\opencv3_build\\install\\x86\\mingw\\bin\\libopencv_highgui341d.dll
+LIBS += C:\\opencv3_build\\install\\x86\\mingw\\bin\\libopencv_objdetect341d.dll
+LIBS += C:\\opencv3_build\\install\\x86\\mingw\\bin\\libopencv_video341d.dll
+LIBS += C:\\opencv3_build\\install\\x86\\mingw\\bin\\libopencv_videoio341d.dll
+LIBS += C:\\opencv3_build\\install\\x86\\mingw\\bin\\libopencv_calib3d341d.dll
+LIBS += C:\\opencv3_build\\install\\x86\\mingw\\bin\\libopencv_imgproc341d.dll
+LIBS += C:\\opencv3_build\\install\\x86\\mingw\\bin\\libopencv_ml341d.dll
+
 SOURCES += \
         main.cpp \
     mainwidget.cpp \

@@ -174,7 +174,7 @@ void MainWidget::ButtonCaptureClicked()
 {
     isCaptured = true;
     ButtonStartStopClicked();
-    cv::imwrite("cap.jpg", Frame);
+    //cv::imwrite("cap.jpg", Frame);
     ProcessImage();
     ui->ButtonDraw->setEnabled(true);
 }
