@@ -16,9 +16,6 @@ void CameraThread::run()
         if (!Camera->read(*frame))
         {
             emit Error();
-            delete(frame);
-            delete(orig);
-            delete(Camera);
             break;
         }
         frame->copyTo(*orig);

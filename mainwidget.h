@@ -6,7 +6,6 @@
 #include <QDesktopWidget>
 #include <QThread>
 #include <QtNetwork/QUdpSocket>
-#include <QFileDialog>
 #include <fstream>
 
 #include <opencv2/imgproc.hpp>
@@ -42,7 +41,6 @@ private:
     QUdpSocket *udpSocket;
     QUdpSocket *udpRecvSocket;
     bool isStarted;
-    bool drawPhoto = false;
     bool isCaptured;
     bool isDrawing = false;
     bool autoMode;
@@ -59,10 +57,8 @@ private slots:
     void ButtonStartStopClicked();
     void ButtonSettingsClicked();
     void ButtonDrawClicked();
-    void ButtonLoadClicked();
     void cancelDrawButtonClicked();
     void processPendingDatagrams();
-    QPixmap convertMatToQPixmap(cv::Mat img);
     void SettingsApplied(SettingsStruct settings);
     void FrameReady(cv::Mat *frame, cv::Mat *orig);
     void Update( int*, int*, int*, int*, int*);

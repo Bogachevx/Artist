@@ -116,7 +116,7 @@ public:
 
         ButtonSaveLoad = new QPushButton(verticalLayoutWidget);
         ButtonSaveLoad->setObjectName(QStringLiteral("ButtonSaveLoad"));
-        ButtonSaveLoad->setEnabled(true);
+        ButtonSaveLoad->setEnabled(false);
         QIcon icon6;
         icon6.addFile(QStringLiteral(":/res/icons/upload.ico"), QSize(), QIcon::Normal, QIcon::Off);
         ButtonSaveLoad->setIcon(icon6);
@@ -138,7 +138,7 @@ public:
         ImageView = new QLabel(MainWidget);
         ImageView->setObjectName(QStringLiteral("ImageView"));
         ImageView->setGeometry(QRect(90, 10, 800, 681));
-        ImageView->setStyleSheet(QStringLiteral("background-color: rgb(157, 42, 52);"));
+        ImageView->setStyleSheet(QStringLiteral("background-color: rgb(79, 93, 115);"));
         ImageView->setScaledContents(false);
         ImageView->setAlignment(Qt::AlignCenter);
 
@@ -148,7 +148,6 @@ public:
         QObject::connect(ButtonCapture, SIGNAL(clicked()), MainWidget, SLOT(ButtonCaptureClicked()));
         QObject::connect(ButtonDraw, SIGNAL(clicked()), MainWidget, SLOT(ButtonDrawClicked()));
         QObject::connect(ButtonQuit, SIGNAL(clicked()), MainWidget, SLOT(close()));
-        QObject::connect(ButtonSaveLoad, SIGNAL(clicked()), MainWidget, SLOT(ButtonLoadClicked()));
 
         QMetaObject::connectSlotsByName(MainWidget);
     } // setupUi

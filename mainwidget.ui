@@ -158,7 +158,7 @@
     <item>
      <widget class="QPushButton" name="ButtonSaveLoad">
       <property name="enabled">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
       <property name="text">
        <string/>
@@ -210,7 +210,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(206, 30, 37);</string>
+    <string notr="true">background-color: rgb(79, 93, 115);</string>
    </property>
    <property name="text">
     <string/>
@@ -220,22 +220,6 @@
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>620</x>
-     <y>20</y>
-     <width>261</width>
-     <height>71</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources.qrc">:/res/icons/robowizard__logo.png</pixmap>
    </property>
   </widget>
  </widget>
@@ -282,8 +266,8 @@
    <slot>ButtonCaptureClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>54</x>
-     <y>253</y>
+     <x>53</x>
+     <y>286</y>
     </hint>
     <hint type="destinationlabel">
      <x>81</x>
@@ -298,8 +282,8 @@
    <slot>ButtonDrawClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>44</x>
-     <y>336</y>
+     <x>43</x>
+     <y>380</y>
     </hint>
     <hint type="destinationlabel">
      <x>81</x>
@@ -314,28 +298,12 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>53</x>
-     <y>599</y>
+     <x>52</x>
+     <y>524</y>
     </hint>
     <hint type="destinationlabel">
      <x>55</x>
      <y>588</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>ButtonSaveLoad</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWidget</receiver>
-   <slot>ButtonLoadClicked()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>48</x>
-     <y>481</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>-4</x>
-     <y>433</y>
     </hint>
    </hints>
   </connection>
@@ -345,6 +313,5 @@
   <slot>ButtonDrawClicked()</slot>
   <slot>ButtonCaptureClicked()</slot>
   <slot>ButtonStartStopClicked()</slot>
-  <slot>ButtonLoadClicked()</slot>
  </slots>
 </ui>

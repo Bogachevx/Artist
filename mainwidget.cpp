@@ -76,18 +76,9 @@ cv::Rect MainWidget::getROIRect(cv::Mat *frame)
 
 void MainWidget::ProcessImage()
 {
-    cv::Mat ROI;
-    if (drawPhoto == false)
-    {
-        cv::Mat temp(Frame, getROIRect(&Frame));
-        ROI = temp.clone();
-    }
-    else
-    {
-        qDebug() << 1;
-        ROI = Frame;//.clone();
-        qDebug() << 2;
-    }
+
+    cv::Mat temp(Frame, getROIRect(&Frame));
+    cv::Mat ROI = temp.clone();
     std::vector<std::vector<cv::Point>> contours;
     std::vector<std::vector<cv::Point>> smallcontours;
     double scaleX = (double)ProgramSettings.paperSize.Width/ ROI.cols;
@@ -104,25 +95,12 @@ void MainWidget::ProcessImage()
     cv::Canny(ROI, ROI, ProgramSettings.processSettings.Threshold1,  ProgramSettings.processSettings.Threshold2);
     cv::findContours(ROI, contours, CV_RETR_TREE, CV_CHAIN_APPROX_NONE);
     cv::cvtColor(ROI, ROI, CV_GRAY2RGB);
-    //cv::imshow("222", ROI);
-    qDebug() << 3;
+
     ROI = ROI*0;
-    int previewSizew;
-    int previewSizeh;
-    if (drawPhoto == true)
-    {
-        previewSizew = (ProgramSettings.paperSize.Width/20)*20;
-        previewSizeh = (ProgramSettings.paperSize.Height/20)*20;
-    }
-    else
-    {
-        previewSizew = (Frame.cols/20)*20;
-        previewSizeh = (Frame.rows/20)*20;
-    }
+    int previewSizew = (ProgramSettings.paperSize.Width/20)*20;
+    int previewSizeh = (ProgramSettings.paperSize.Height/20)*20;
     //contours = contours;
-    qDebug() << 4;
     cv::Mat ROIScaled = cv::Mat::zeros(cv::Size(previewSizew, previewSizeh), CV_8UC3);
-    qDebug() << 5;
     for (uint i = 0; i < contours.size(); i++)
     {
         cv::approxPolyDP(contours[i], contours[i], ProgramSettings.approxSize/100.0, true);
@@ -139,24 +117,51 @@ void MainWidget::ProcessImage()
                 //contours[i][j].y *= scale;
             }
             std::vector<cv::Point> temp;
-            for (int t = 0; t < contours[i].size()/2+1; t++)
+            for (int t = 0; t < contours[i].size()/2; t++)
             {
                 temp.push_back(contours[i][t]);
             }
             smallcontours.push_back(contours[i]);
             cv::drawContours(ROIScaled, contours, i, cv::Scalar(255,255,255));
+            /*
+            for (uint j = 0; j < contours[i].size(); j++)
+            {
+                contours[i][j].x = (int)((double)contours[i][j].x * scale);
+                contours[i][j].y = (int)((double)contours[i][j].y * scale);
+
+                //contours[i][j].x *= scale;
+                //contours[i][j].y *= scale;
+            }
+            //smallcontours.push_back(contours[i]);
+            */
         }
+        /*for (uint j = 0; j < contours[i].size(); j++)
+        {
+            contours[i][j].x = (int)((double)contours[i][j].x * scale);
+            contours[i][j].y = (int)((double)contours[i][j].y * scale);
+
+            //contours[i][j].x *= scale;
+            //contours[i][j].y *= scale;
+        }
+        cv::drawContours(ROIScaled, contours, i, cv::Scalar(255,255,255));
+        */
     }
 
     Contours = smallcontours;
-    qDebug() << 6;
-    //cv::namedWindow("test", CV_WINDOW_FREERATIO);
-    //cv::imshow("test", ROI);
-    //cv::setWindowProperty("test", CV_WINDOW_FREERATIO, 1);
-    //ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) ROI.data,
-    //            ROI.cols, ROI.rows, QImage::Format_RGB888)));
-    ui->ImageView->setPixmap(convertMatToQPixmap(ROI));
-    qDebug() << 7;
+    ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) ROI.data,
+                ROI.cols, ROI.rows, QImage::Format_RGB888)));
+
+    /*
+    if (preview != nullptr)
+    {
+        preview->close();
+        delete(preview);
+        preview = nullptr;
+    }
+    preview = new Preview();
+    preview->setImage(ROIScaled);
+    preview->show();
+    */
 }
 
 void MainWidget::UDP_Send(QByteArray datagram)
@@ -182,7 +187,6 @@ void MainWidget::ButtonStartStopClicked()
 
         isCaptured = false;
         isDrawing = false;
-        drawPhoto = false;
 
         camera = new CameraThread(ProgramSettings.cameraAddress);
         connect(camera, SIGNAL(Ready(cv::Mat * ,cv::Mat *)), this, SLOT(FrameReady(cv::Mat * ,cv::Mat *)));
@@ -204,8 +208,6 @@ void MainWidget::ButtonStartStopClicked()
 
         camera->stop();
         camera->wait();
-        camera->exit();
-
         delete(camera);
         camera = nullptr;
 
@@ -223,7 +225,7 @@ void MainWidget::ButtonSettingsClicked()
     SettingsWindow->move(0,0);
     connect(SettingsWindow, SIGNAL(Apply(SettingsStruct)),
             this, SLOT(SettingsApplied(SettingsStruct)));
-    if ((!isStarted && isCaptured) || drawPhoto)
+    if (!isStarted && isCaptured)
     {
         connect(SettingsWindow, SIGNAL(EmitUpdate(int*,int*,int*,int*,int*)), this, SLOT(Update(int*,int*,int*,int*,int*)));
     }
@@ -259,27 +261,10 @@ void MainWidget::ButtonDrawClicked()
         //}
 }
 
-void MainWidget::ButtonLoadClicked()
-{
-    QString str = QFileDialog::getOpenFileName(0, "Open Dialog", "", "*.jpeg *.jpg *.png");
-    cv::Mat frame = cv::imread(str.toStdString());
-    //cv::imshow("22222", frame);
-    cv::cvtColor(frame, frame, CV_BGR2RGB);
-    //ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) Frame.data,
-    //                                                   Frame.cols, Frame.rows, QImage::Format_RGB888)));
-    drawPhoto = true;
-    //cv::imshow("22222", frame);
-    Frame = frame;
-    ProcessImage();
-    drawPhoto = false;
-    ui->ButtonDraw->setEnabled(true);
-}
-
 void MainWidget::cancelDrawButtonClicked()
 {
     pointsSender->stop();
     dp->close();
-    pointsSender->exit();
     QThread::msleep(100);
     delete(dp);
     delete(pointsSender);   
@@ -307,39 +292,6 @@ void MainWidget::processPendingDatagrams()
     }
 }
 
-QPixmap MainWidget::convertMatToQPixmap(cv::Mat mat)
-{
-
-    QPixmap pixmap;
-    if(mat.type()==CV_8UC1)
-    {
-        // Set the color table (used to translate colour indexes to qRgb values)
-        QVector<QRgb> colorTable;
-        for (int i=0; i<256; i++)
-            colorTable.push_back(qRgb(i,i,i));
-        // Copy input Mat
-        const uchar *qImageBuffer = (const uchar*)mat.data;
-        // Create QImage with same dimensions as input Mat
-        QImage img(qImageBuffer, mat.cols, mat.rows, mat.step, QImage::Format_Indexed8);
-        img.setColorTable(colorTable);
-        pixmap = QPixmap::fromImage(img);
-    }
-    // 8-bits unsigned, NO. OF CHANNELS=3
-    if(mat.type()==CV_8UC3)
-    {
-        // Copy input Mat
-        const uchar *qImageBuffer = (const uchar*)mat.data;
-        // Create QImage with same dimensions as input Mat
-        QImage img(qImageBuffer, mat.cols, mat.rows, mat.step, QImage::Format_RGB888);
-        pixmap = QPixmap::fromImage(img.rgbSwapped());
-    }
-    else
-    {
-        qDebug() << "ERROR: Mat could not be converted to QImage or QPixmap.";
-        return QPixmap();
-    }
-}
-
 void MainWidget::SettingsApplied(SettingsStruct settings)
 {
 
@@ -362,7 +314,7 @@ void MainWidget::FrameReady(cv::Mat *frame, cv::Mat *orig)
 
 void MainWidget::Update(int *thresh1, int *thresh2, int *blur, int *as, int *mcl)
 {
-    if (!isCaptured)
+    if (isCaptured)
     {
 
         ProgramSettings.processSettings.Threshold1 = *thresh1;

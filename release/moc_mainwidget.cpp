@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWidget_t {
-    QByteArrayData data[19];
-    char stringdata0[251];
+    QByteArrayData data[18];
+    char stringdata0[233];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,28 +37,26 @@ QT_MOC_LITERAL(2, 32, 0), // ""
 QT_MOC_LITERAL(3, 33, 22), // "ButtonStartStopClicked"
 QT_MOC_LITERAL(4, 56, 21), // "ButtonSettingsClicked"
 QT_MOC_LITERAL(5, 78, 17), // "ButtonDrawClicked"
-QT_MOC_LITERAL(6, 96, 17), // "ButtonLoadClicked"
-QT_MOC_LITERAL(7, 114, 23), // "cancelDrawButtonClicked"
-QT_MOC_LITERAL(8, 138, 23), // "processPendingDatagrams"
-QT_MOC_LITERAL(9, 162, 15), // "SettingsApplied"
-QT_MOC_LITERAL(10, 178, 14), // "SettingsStruct"
-QT_MOC_LITERAL(11, 193, 8), // "settings"
-QT_MOC_LITERAL(12, 202, 10), // "FrameReady"
-QT_MOC_LITERAL(13, 213, 8), // "cv::Mat*"
-QT_MOC_LITERAL(14, 222, 5), // "frame"
-QT_MOC_LITERAL(15, 228, 4), // "orig"
-QT_MOC_LITERAL(16, 233, 6), // "Update"
-QT_MOC_LITERAL(17, 240, 4), // "int*"
-QT_MOC_LITERAL(18, 245, 5) // "Error"
+QT_MOC_LITERAL(6, 96, 23), // "cancelDrawButtonClicked"
+QT_MOC_LITERAL(7, 120, 23), // "processPendingDatagrams"
+QT_MOC_LITERAL(8, 144, 15), // "SettingsApplied"
+QT_MOC_LITERAL(9, 160, 14), // "SettingsStruct"
+QT_MOC_LITERAL(10, 175, 8), // "settings"
+QT_MOC_LITERAL(11, 184, 10), // "FrameReady"
+QT_MOC_LITERAL(12, 195, 8), // "cv::Mat*"
+QT_MOC_LITERAL(13, 204, 5), // "frame"
+QT_MOC_LITERAL(14, 210, 4), // "orig"
+QT_MOC_LITERAL(15, 215, 6), // "Update"
+QT_MOC_LITERAL(16, 222, 4), // "int*"
+QT_MOC_LITERAL(17, 227, 5) // "Error"
 
     },
     "MainWidget\0ButtonCaptureClicked\0\0"
     "ButtonStartStopClicked\0ButtonSettingsClicked\0"
-    "ButtonDrawClicked\0ButtonLoadClicked\0"
-    "cancelDrawButtonClicked\0processPendingDatagrams\0"
-    "SettingsApplied\0SettingsStruct\0settings\0"
-    "FrameReady\0cv::Mat*\0frame\0orig\0Update\0"
-    "int*\0Error"
+    "ButtonDrawClicked\0cancelDrawButtonClicked\0"
+    "processPendingDatagrams\0SettingsApplied\0"
+    "SettingsStruct\0settings\0FrameReady\0"
+    "cv::Mat*\0frame\0orig\0Update\0int*\0Error"
 };
 #undef QT_MOC_LITERAL
 
@@ -68,7 +66,7 @@ static const uint qt_meta_data_MainWidget[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+      10,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -76,17 +74,16 @@ static const uint qt_meta_data_MainWidget[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   69,    2, 0x08 /* Private */,
-       3,    0,   70,    2, 0x08 /* Private */,
-       4,    0,   71,    2, 0x08 /* Private */,
-       5,    0,   72,    2, 0x08 /* Private */,
-       6,    0,   73,    2, 0x08 /* Private */,
-       7,    0,   74,    2, 0x08 /* Private */,
-       8,    0,   75,    2, 0x08 /* Private */,
-       9,    1,   76,    2, 0x08 /* Private */,
-      12,    2,   79,    2, 0x08 /* Private */,
-      16,    5,   84,    2, 0x08 /* Private */,
-      18,    0,   95,    2, 0x08 /* Private */,
+       1,    0,   64,    2, 0x08 /* Private */,
+       3,    0,   65,    2, 0x08 /* Private */,
+       4,    0,   66,    2, 0x08 /* Private */,
+       5,    0,   67,    2, 0x08 /* Private */,
+       6,    0,   68,    2, 0x08 /* Private */,
+       7,    0,   69,    2, 0x08 /* Private */,
+       8,    1,   70,    2, 0x08 /* Private */,
+      11,    2,   73,    2, 0x08 /* Private */,
+      15,    5,   78,    2, 0x08 /* Private */,
+      17,    0,   89,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -95,10 +92,9 @@ static const uint qt_meta_data_MainWidget[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 10,   11,
-    QMetaType::Void, 0x80000000 | 13, 0x80000000 | 13,   14,   15,
-    QMetaType::Void, 0x80000000 | 17, 0x80000000 | 17, 0x80000000 | 17, 0x80000000 | 17, 0x80000000 | 17,    2,    2,    2,    2,    2,
+    QMetaType::Void, 0x80000000 | 9,   10,
+    QMetaType::Void, 0x80000000 | 12, 0x80000000 | 12,   13,   14,
+    QMetaType::Void, 0x80000000 | 16, 0x80000000 | 16, 0x80000000 | 16, 0x80000000 | 16, 0x80000000 | 16,    2,    2,    2,    2,    2,
     QMetaType::Void,
 
        0        // eod
@@ -114,13 +110,12 @@ void MainWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 1: _t->ButtonStartStopClicked(); break;
         case 2: _t->ButtonSettingsClicked(); break;
         case 3: _t->ButtonDrawClicked(); break;
-        case 4: _t->ButtonLoadClicked(); break;
-        case 5: _t->cancelDrawButtonClicked(); break;
-        case 6: _t->processPendingDatagrams(); break;
-        case 7: _t->SettingsApplied((*reinterpret_cast< SettingsStruct(*)>(_a[1]))); break;
-        case 8: _t->FrameReady((*reinterpret_cast< cv::Mat*(*)>(_a[1])),(*reinterpret_cast< cv::Mat*(*)>(_a[2]))); break;
-        case 9: _t->Update((*reinterpret_cast< int*(*)>(_a[1])),(*reinterpret_cast< int*(*)>(_a[2])),(*reinterpret_cast< int*(*)>(_a[3])),(*reinterpret_cast< int*(*)>(_a[4])),(*reinterpret_cast< int*(*)>(_a[5]))); break;
-        case 10: _t->Error(); break;
+        case 4: _t->cancelDrawButtonClicked(); break;
+        case 5: _t->processPendingDatagrams(); break;
+        case 6: _t->SettingsApplied((*reinterpret_cast< SettingsStruct(*)>(_a[1]))); break;
+        case 7: _t->FrameReady((*reinterpret_cast< cv::Mat*(*)>(_a[1])),(*reinterpret_cast< cv::Mat*(*)>(_a[2]))); break;
+        case 8: _t->Update((*reinterpret_cast< int*(*)>(_a[1])),(*reinterpret_cast< int*(*)>(_a[2])),(*reinterpret_cast< int*(*)>(_a[3])),(*reinterpret_cast< int*(*)>(_a[4])),(*reinterpret_cast< int*(*)>(_a[5]))); break;
+        case 9: _t->Error(); break;
         default: ;
         }
     }
@@ -151,13 +146,13 @@ int MainWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 10;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 11)
+        if (_id < 10)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 11;
+        _id -= 10;
     }
     return _id;
 }
