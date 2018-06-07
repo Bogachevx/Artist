@@ -225,10 +225,10 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>620</x>
+     <x>90</x>
      <y>20</y>
-     <width>261</width>
-     <height>71</height>
+     <width>491</width>
+     <height>141</height>
     </rect>
    </property>
    <property name="text">
@@ -236,6 +236,9 @@
    </property>
    <property name="pixmap">
     <pixmap resource="resources.qrc">:/res/icons/robowizard__logo.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>

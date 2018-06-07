@@ -153,9 +153,9 @@ void MainWidget::ProcessImage()
     //cv::namedWindow("test", CV_WINDOW_FREERATIO);
     //cv::imshow("test", ROI);
     //cv::setWindowProperty("test", CV_WINDOW_FREERATIO, 1);
-    //ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) ROI.data,
-    //            ROI.cols, ROI.rows, QImage::Format_RGB888)));
-    ui->ImageView->setPixmap(convertMatToQPixmap(ROI));
+    ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) ROI.data,
+                ROI.cols, ROI.rows, QImage::Format_RGB888)));
+    //ui->ImageView->setPixmap(convertMatToQPixmap(ROI));
     qDebug() << 7;
 }
 
@@ -223,7 +223,7 @@ void MainWidget::ButtonSettingsClicked()
     SettingsWindow->move(0,0);
     connect(SettingsWindow, SIGNAL(Apply(SettingsStruct)),
             this, SLOT(SettingsApplied(SettingsStruct)));
-    if ((!isStarted && isCaptured) || drawPhoto)
+    if ((!isStarted && isCaptured))
     {
         connect(SettingsWindow, SIGNAL(EmitUpdate(int*,int*,int*,int*,int*)), this, SLOT(Update(int*,int*,int*,int*,int*)));
     }

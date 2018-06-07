@@ -36,6 +36,7 @@ public:
     QPushButton *ButtonSaveLoad;
     QPushButton *ButtonQuit;
     QLabel *ImageView;
+    QLabel *label;
 
     void setupUi(QWidget *MainWidget)
     {
@@ -138,9 +139,14 @@ public:
         ImageView = new QLabel(MainWidget);
         ImageView->setObjectName(QStringLiteral("ImageView"));
         ImageView->setGeometry(QRect(90, 10, 800, 681));
-        ImageView->setStyleSheet(QStringLiteral("background-color: rgb(157, 42, 52);"));
+        ImageView->setStyleSheet(QStringLiteral("background-color: rgb(206, 30, 37);"));
         ImageView->setScaledContents(false);
         ImageView->setAlignment(Qt::AlignCenter);
+        label = new QLabel(MainWidget);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(90, 20, 491, 141));
+        label->setPixmap(QPixmap(QString::fromUtf8(":/res/icons/robowizard__logo.png")));
+        label->setScaledContents(false);
 
         retranslateUi(MainWidget);
         QObject::connect(ButtonSettings, SIGNAL(clicked()), MainWidget, SLOT(ButtonSettingsClicked()));
@@ -164,6 +170,7 @@ public:
         ButtonSaveLoad->setText(QString());
         ButtonQuit->setText(QString());
         ImageView->setText(QString());
+        label->setText(QString());
     } // retranslateUi
 
 };
