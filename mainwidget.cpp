@@ -89,6 +89,10 @@ void MainWidget::ProcessImage()
     {
         scale = (scaleX < scaleY) ? scaleX : scaleY;
     }
+    else
+    {
+        scale = (scaleX > scaleY) ? scaleX : scaleY;
+    }
     qDebug() << scale;
     cv::cvtColor(ROI, ROI, CV_BGR2GRAY);
     cv::medianBlur(ROI, ROI, ProgramSettings.blurValue);
@@ -112,56 +116,20 @@ void MainWidget::ProcessImage()
             {
                 contours[i][j].x = (int)((double)contours[i][j].x * scale);
                 contours[i][j].y = (int)((double)contours[i][j].y * scale);
-
-                //contours[i][j].x *= scale;
-                //contours[i][j].y *= scale;
             }
             std::vector<cv::Point> temp;
-            for (int t = 0; t < contours[i].size()/2; t++)
+            for (uint t = 0; t < contours[i].size()/2; t++)
             {
                 temp.push_back(contours[i][t]);
             }
             smallcontours.push_back(contours[i]);
             cv::drawContours(ROIScaled, contours, i, cv::Scalar(255,255,255));
-            /*
-            for (uint j = 0; j < contours[i].size(); j++)
-            {
-                contours[i][j].x = (int)((double)contours[i][j].x * scale);
-                contours[i][j].y = (int)((double)contours[i][j].y * scale);
-
-                //contours[i][j].x *= scale;
-                //contours[i][j].y *= scale;
-            }
-            //smallcontours.push_back(contours[i]);
-            */
         }
-        /*for (uint j = 0; j < contours[i].size(); j++)
-        {
-            contours[i][j].x = (int)((double)contours[i][j].x * scale);
-            contours[i][j].y = (int)((double)contours[i][j].y * scale);
-
-            //contours[i][j].x *= scale;
-            //contours[i][j].y *= scale;
-        }
-        cv::drawContours(ROIScaled, contours, i, cv::Scalar(255,255,255));
-        */
     }
-
+    //cv::imshow("ewe", ROIScaled);
     Contours = smallcontours;
     ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) ROI.data,
                 ROI.cols, ROI.rows, QImage::Format_RGB888)));
-
-    /*
-    if (preview != nullptr)
-    {
-        preview->close();
-        delete(preview);
-        preview = nullptr;
-    }
-    preview = new Preview();
-    preview->setImage(ROIScaled);
-    preview->show();
-    */
 }
 
 void MainWidget::UDP_Send(QByteArray datagram)
@@ -170,11 +138,67 @@ void MainWidget::UDP_Send(QByteArray datagram)
     QThread::msleep(50);
 }
 
+void MainWidget::keyPressEvent(QKeyEvent *e)
+{
+    switch (e->key())
+    {
+    case Qt::Key_Return:
+    {
+        if (ui->ButtonCapture->isEnabled())
+        {
+            ButtonCaptureClicked();
+        }
+        break;
+    }
+    }
+    if (isStarted && !e->isAutoRepeat())
+    {
+        switch (e->key())
+        {
+        case Qt::Key_Up:
+        case Qt::Key_W:
+        {
+            UDP_Send("U");
+            break;
+        }
+
+        case Qt::Key_Right:
+        case Qt::Key_D:
+        {
+            UDP_Send("R");
+            break;
+        }
+
+        case Qt::Key_Down:
+        case Qt::Key_S:
+        {
+            UDP_Send("D");
+            break;
+        }
+
+        case Qt::Key_Left:
+        case Qt::Key_A:
+        {
+            UDP_Send("L");
+            break;
+        }
+        }
+    }
+}
+
+void MainWidget::keyReleaseEvent(QKeyEvent *e)
+{
+    if (isStarted && !e->isAutoRepeat())
+    {
+        UDP_Send("B");
+    }
+}
+
 void MainWidget::ButtonCaptureClicked()
 {
     isCaptured = true;
     ButtonStartStopClicked();
-    //cv::imwrite("cap.jpg", Frame);
+    cv::imwrite("cap.jpg", Frame);
     ProcessImage();
     ui->ButtonDraw->setEnabled(true);
 }
@@ -195,7 +219,7 @@ void MainWidget::ButtonStartStopClicked()
         camera->setCameraResolution(ProgramSettings.cameraResolution);
         camera->setProgramSettings(ProgramSettings);
         camera->start();
-
+        qDebug() << camera->isRunning();
         ui->ButtonStartStop->setIcon(QIcon(":res/icons/denied.ico"));
         ui->ButtonCapture->setEnabled(true);
         ui->ButtonDraw->setEnabled(false);
@@ -208,7 +232,9 @@ void MainWidget::ButtonStartStopClicked()
 
         camera->stop();
         camera->wait();
+
         delete(camera);
+        qDebug() << camera->isRunning();
         camera = nullptr;
 
         ui->ButtonStartStop->setIcon(QIcon(":res/icons/play.ico"));
@@ -223,6 +249,9 @@ void MainWidget::ButtonSettingsClicked()
 
     SettingsWindow = new Settings();
     SettingsWindow->move(0,0);
+
+    SettingsWindow->LoadSettings(ProgramSettings);
+
     connect(SettingsWindow, SIGNAL(Apply(SettingsStruct)),
             this, SLOT(SettingsApplied(SettingsStruct)));
     if (!isStarted && isCaptured)
@@ -233,32 +262,20 @@ void MainWidget::ButtonSettingsClicked()
     {
         disconnect(SettingsWindow, SIGNAL(EmitUpdate(int*,int*,int*,int*,int*)), this, SLOT(Update(int*,int*,int*,int*,int*)));
     }
-    SettingsWindow->LoadSettings(ProgramSettings);
     SettingsWindow->show();
 }
 
 void MainWidget::ButtonDrawClicked()
 {
-    //if (!isDrawing)
-    //{
         dp = new DrawProcess();
-        connect(dp, SIGNAL(cancelButtonClicked()), this, SLOT(cancelDrawButtonClicked()));
         UDP_Send(QByteArray::number(-3));
         pointsSender = new PointsSender(Contours);
         pointsSender->start();
+
         connect(pointsSender, SIGNAL(sendPercent(int)), dp, SLOT(setProgressBarValue(int)));
         connect(dp, SIGNAL(cancelButtonClicked()), this, SLOT(cancelDrawButtonClicked()));
         dp->show();
         isDrawing = true;
-    //}
-    //else
-    //{
-    //    pointsSender->stop();
-    //    UDP_Send(QByteArray::number(-10));
-    //    ui->ButtonDraw->setIcon(QIcon(":res/icons/paintbrush2.ico"));
-
-    //    isDrawing = false;
-        //}
 }
 
 void MainWidget::cancelDrawButtonClicked()
@@ -271,7 +288,7 @@ void MainWidget::cancelDrawButtonClicked()
     UDP_Send(QByteArray::number(-10));
 
 }
-
+/*
 void MainWidget::processPendingDatagrams()
 {
     QByteArray datagram;
@@ -291,10 +308,9 @@ void MainWidget::processPendingDatagrams()
         //                     .arg(datagram.constData()));
     }
 }
-
+*/
 void MainWidget::SettingsApplied(SettingsStruct settings)
 {
-
     ProgramSettings = settings;
 }
 
@@ -308,7 +324,6 @@ void MainWidget::FrameReady(cv::Mat *frame, cv::Mat *orig)
     {
         ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) frame->data,
                                                        frame->cols, frame->rows, QImage::Format_RGB888)));
-
     }
 }
 

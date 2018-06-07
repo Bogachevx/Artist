@@ -34,12 +34,13 @@ public:
     QPushButton *ButtonSaveLoad;
     QPushButton *ButtonQuit;
     QLabel *ImageView;
+    QLabel *label;
 
     void setupUi(QWidget *MainWidget)
     {
         if (MainWidget->objectName().isEmpty())
             MainWidget->setObjectName(QStringLiteral("MainWidget"));
-        MainWidget->resize(900, 702);
+        MainWidget->resize(900, 606);
         QIcon icon;
         icon.addFile(QStringLiteral(":/res/icons/flash.ico"), QSize(), QIcon::Normal, QIcon::Off);
         MainWidget->setWindowIcon(icon);
@@ -136,9 +137,15 @@ public:
         ImageView = new QLabel(MainWidget);
         ImageView->setObjectName(QStringLiteral("ImageView"));
         ImageView->setGeometry(QRect(90, 10, 800, 681));
-        ImageView->setStyleSheet(QStringLiteral("background-color: rgb(79, 93, 115);"));
+        ImageView->setStyleSheet(QStringLiteral("background-color: rgb(206, 30, 37, 255);"));
         ImageView->setScaledContents(false);
         ImageView->setAlignment(Qt::AlignCenter);
+        label = new QLabel(MainWidget);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(110, 20, 261, 86));
+        label->setStyleSheet(QStringLiteral("background-color: rgba(255, 255, 255, 0);"));
+        label->setPixmap(QPixmap(QString::fromUtf8(":/res/icons/robowizard__logo.ico")));
+        label->setScaledContents(false);
 
         retranslateUi(MainWidget);
         QObject::connect(ButtonSettings, SIGNAL(clicked()), MainWidget, SLOT(ButtonSettingsClicked()));
@@ -161,6 +168,7 @@ public:
         ButtonSaveLoad->setText(QString());
         ButtonQuit->setText(QString());
         ImageView->setText(QString());
+        label->setText(QString());
     } // retranslateUi
 
 };

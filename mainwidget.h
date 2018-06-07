@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QThread>
+#include <QKeyEvent>
 #include <QtNetwork/QUdpSocket>
 #include <fstream>
 
@@ -51,6 +52,9 @@ private:
     void ProcessImage();
     void UDP_Send(QByteArray datagram);
 
+protected:
+    void keyPressEvent(QKeyEvent *e);
+    void keyReleaseEvent(QKeyEvent *e);
 
 private slots:
     void ButtonCaptureClicked();
@@ -58,7 +62,7 @@ private slots:
     void ButtonSettingsClicked();
     void ButtonDrawClicked();
     void cancelDrawButtonClicked();
-    void processPendingDatagrams();
+    //void processPendingDatagrams();
     void SettingsApplied(SettingsStruct settings);
     void FrameReady(cv::Mat *frame, cv::Mat *orig);
     void Update( int*, int*, int*, int*, int*);

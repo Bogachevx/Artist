@@ -29,6 +29,7 @@ LIBS += C:\\opencv3_build\\install\\x86\\mingw\\bin\\libopencv_videoio341d.dll
 LIBS += C:\\opencv3_build\\install\\x86\\mingw\\bin\\libopencv_calib3d341d.dll
 LIBS += C:\\opencv3_build\\install\\x86\\mingw\\bin\\libopencv_imgproc341d.dll
 LIBS += C:\\opencv3_build\\install\\x86\\mingw\\bin\\libopencv_ml341d.dll
+LIBS += C:\\opencv3_build\\install\\x86\\mingw\\bin\\libopencv_imgcodecs341d.dll
 
 SOURCES += \
         main.cpp \

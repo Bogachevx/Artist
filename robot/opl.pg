@@ -1,6 +1,7 @@
 .PROGRAM opl() #0
   k = 0 ; Drawing iterator
   op_flag = -1 ; Operation flag
+  cor_spd = 10
   dip = FALSE
   $Percent = ""
   
@@ -57,6 +58,20 @@
 		op_flag = -1
 	END
 	
+	; --------------------------
+	IF direction == 8 THEN
+		DRAW  ,,cor_spd 	
+	END
+	IF direction == 5 THEN
+		DRAW  ,,-cor_spd 	
+	END
+	IF direction == 6 THEN
+		DRAW  cor_spd 	
+	END
+	IF direction == 4 THEN
+		DRAW  -cor_spd 	
+	END
+	; --------------------------
   END
   
 .END

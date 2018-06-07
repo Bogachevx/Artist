@@ -7,9 +7,11 @@
   ispainting = FALSE;
   real_length = 0 ; Amount of drawing points
   sent_length = 0
+  direction = -1; for codes look at the numpad
   isfinished = FALSE
   $State = ""
   $Uploaded = ""
+  
   
   WHILE TRUE DO
   
@@ -47,6 +49,40 @@
       TYPE "FINISHED DATA RECIEVING"
       $cnt[0] = ""
     END
+	
+	; -----------------------------------
+	
+	IF $cnt[0]=="U" THEN
+      $State = "CORRECTION"
+	  direction = 8
+      $cnt[0] = ""
+    END
+	
+	IF $cnt[0]=="D" THEN
+      $State = "CORRECTION"
+	  direction = 5
+      $cnt[0] = ""
+    END
+	
+	IF $cnt[0]=="R" THEN
+      $State = "CORRECTION"
+	  direction = 6
+      $cnt[0] = ""
+    END
+	
+	IF $cnt[0]=="L" THEN
+      $State = "CORRECTION"
+	  direction = 4
+      $cnt[0] = ""
+    END
+	
+	IF $cnt[0]=="B" THEN
+      $State = "CORRECTION"
+	  direction = -1
+      $cnt[0] = ""
+    END
+	
+	; --------------------------
 	
     IF LEN($cnt[0])>5 THEN
       FOR i = 0 TO 2 STEP 1
