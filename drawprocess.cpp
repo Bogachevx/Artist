@@ -15,6 +15,7 @@ DrawProcess::DrawProcess(QWidget *parent) :
     setWindowFlags(Qt::Window
     | Qt::WindowMinimizeButtonHint);
     this->setFixedSize(this->size());
+    this->move(0,0);
 }
 
 
@@ -23,7 +24,7 @@ DrawProcess::~DrawProcess()
     delete ui;
 }
 
-void DrawProcess::ButtonCancelDrawClicked()
+void DrawProcess::ButtonCancelClicked()
 {
-    emit cancelButtonClicked();
+    emit CancelDraw();
 }

@@ -42,10 +42,10 @@
     <string>Points sent:</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="ButtonCancelDraw">
+  <widget class="QPushButton" name="ButtonCancel">
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>190</x>
      <y>70</y>
      <width>89</width>
      <height>72</height>
@@ -74,13 +74,13 @@
  </resources>
  <connections>
   <connection>
-   <sender>ButtonCancelDraw</sender>
+   <sender>ButtonCancel</sender>
    <signal>clicked()</signal>
    <receiver>DrawProcess</receiver>
-   <slot>ButtonCancelDrawClicked()</slot>
+   <slot>ButtonCancelClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>151</x>
+     <x>231</x>
      <y>93</y>
     </hint>
     <hint type="destinationlabel">
@@ -91,6 +91,6 @@
   </connection>
  </connections>
  <slots>
-  <slot>ButtonCancelDrawClicked()</slot>
+  <slot>ButtonCancelClicked()</slot>
  </slots>
 </ui>

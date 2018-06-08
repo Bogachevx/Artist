@@ -20,10 +20,10 @@ private:
     Ui::DrawProcess *ui;
 
 public slots:
-    void ButtonCancelDrawClicked();
+    void ButtonCancelClicked();
     void setProgressBarValue(int val);
 signals:
-    void cancelButtonClicked();
+    void CancelDraw();
 };
 
 #endif // DRAWPROCESS_H

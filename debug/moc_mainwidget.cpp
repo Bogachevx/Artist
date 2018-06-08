@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwidget.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.11.0)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.10.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,7 +12,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'mainwidget.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.11.0. It"
+#error "This file was generated using the moc from 5.10.1. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWidget_t {
     QByteArrayData data[18];
-    char stringdata0[233];
+    char stringdata0[227];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,24 +37,24 @@ QT_MOC_LITERAL(2, 32, 0), // ""
 QT_MOC_LITERAL(3, 33, 22), // "ButtonStartStopClicked"
 QT_MOC_LITERAL(4, 56, 21), // "ButtonSettingsClicked"
 QT_MOC_LITERAL(5, 78, 17), // "ButtonDrawClicked"
-QT_MOC_LITERAL(6, 96, 23), // "cancelDrawButtonClicked"
-QT_MOC_LITERAL(7, 120, 23), // "processPendingDatagrams"
-QT_MOC_LITERAL(8, 144, 15), // "SettingsApplied"
-QT_MOC_LITERAL(9, 160, 14), // "SettingsStruct"
-QT_MOC_LITERAL(10, 175, 8), // "settings"
-QT_MOC_LITERAL(11, 184, 10), // "FrameReady"
-QT_MOC_LITERAL(12, 195, 8), // "cv::Mat*"
-QT_MOC_LITERAL(13, 204, 5), // "frame"
-QT_MOC_LITERAL(14, 210, 4), // "orig"
-QT_MOC_LITERAL(15, 215, 6), // "Update"
-QT_MOC_LITERAL(16, 222, 4), // "int*"
-QT_MOC_LITERAL(17, 227, 5) // "Error"
+QT_MOC_LITERAL(6, 96, 23), // "ButtonCancelDrawClicked"
+QT_MOC_LITERAL(7, 120, 17), // "ButtonLoadClicked"
+QT_MOC_LITERAL(8, 138, 15), // "SettingsApplied"
+QT_MOC_LITERAL(9, 154, 14), // "SettingsStruct"
+QT_MOC_LITERAL(10, 169, 8), // "settings"
+QT_MOC_LITERAL(11, 178, 10), // "FrameReady"
+QT_MOC_LITERAL(12, 189, 8), // "cv::Mat*"
+QT_MOC_LITERAL(13, 198, 5), // "frame"
+QT_MOC_LITERAL(14, 204, 4), // "orig"
+QT_MOC_LITERAL(15, 209, 6), // "Update"
+QT_MOC_LITERAL(16, 216, 4), // "int*"
+QT_MOC_LITERAL(17, 221, 5) // "Error"
 
     },
     "MainWidget\0ButtonCaptureClicked\0\0"
     "ButtonStartStopClicked\0ButtonSettingsClicked\0"
-    "ButtonDrawClicked\0cancelDrawButtonClicked\0"
-    "processPendingDatagrams\0SettingsApplied\0"
+    "ButtonDrawClicked\0ButtonCancelDrawClicked\0"
+    "ButtonLoadClicked\0SettingsApplied\0"
     "SettingsStruct\0settings\0FrameReady\0"
     "cv::Mat*\0frame\0orig\0Update\0int*\0Error"
 };
@@ -110,8 +110,8 @@ void MainWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 1: _t->ButtonStartStopClicked(); break;
         case 2: _t->ButtonSettingsClicked(); break;
         case 3: _t->ButtonDrawClicked(); break;
-        case 4: _t->cancelDrawButtonClicked(); break;
-        case 5: _t->processPendingDatagrams(); break;
+        case 4: _t->ButtonCancelDrawClicked(); break;
+        case 5: _t->ButtonLoadClicked(); break;
         case 6: _t->SettingsApplied((*reinterpret_cast< SettingsStruct(*)>(_a[1]))); break;
         case 7: _t->FrameReady((*reinterpret_cast< cv::Mat*(*)>(_a[1])),(*reinterpret_cast< cv::Mat*(*)>(_a[2]))); break;
         case 8: _t->Update((*reinterpret_cast< int*(*)>(_a[1])),(*reinterpret_cast< int*(*)>(_a[2])),(*reinterpret_cast< int*(*)>(_a[3])),(*reinterpret_cast< int*(*)>(_a[4])),(*reinterpret_cast< int*(*)>(_a[5]))); break;

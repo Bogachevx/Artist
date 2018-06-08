@@ -1,8 +1,11 @@
 #include "camerathread.h"
 
-CameraThread::CameraThread(int cameraAddress)
+CameraThread::CameraThread(SettingsStruct settings)
 {
-    Camera = new cv::VideoCapture(cameraAddress);
+    Camera = new cv::VideoCapture(settings.cameraAddress);
+    Camera->set(CV_CAP_PROP_FRAME_WIDTH, settings.cameraResolution.Width);
+    Camera->set(CV_CAP_PROP_FRAME_HEIGHT, settings.cameraResolution.Height);
+    ProgramSettings = settings;
 }
 
 void CameraThread::run()
@@ -16,28 +19,18 @@ void CameraThread::run()
         if (!Camera->read(*frame))
         {
             emit Error();
-            break;
+            return;
         }
         frame->copyTo(*orig);
         drawROIRect(frame);
         emit Ready(frame, orig);
     }
-    if (Camera != nullptr)
-    {
-        Camera->release();
-    }
+    Camera->release();
 }
 
 void CameraThread::stop()
 {
     stopWorking = true;
-}
-
-void CameraThread::setCameraResolution(mSize Resolution)
-{
-    Camera->set(CV_CAP_PROP_FRAME_WIDTH, Resolution.Width);
-    Camera->set(CV_CAP_PROP_FRAME_HEIGHT, Resolution.Height);
-
 }
 
 void CameraThread::drawROIRect(cv::Mat *frame)
@@ -50,9 +43,3 @@ void CameraThread::drawROIRect(cv::Mat *frame)
     RectPoint2.y = RectPoint1.y + ProgramSettings.activeRegionSize.Height;
     cv::rectangle(*frame, RectPoint1, RectPoint2, cv::Scalar(255,0,0));
 }
-
-void CameraThread::setProgramSettings(SettingsStruct settings)
-{
-    ProgramSettings = settings;
-}
-

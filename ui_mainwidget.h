@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwidget.ui'
 **
-** Created by: Qt User Interface Compiler version 5.11.0
+** Created by: Qt User Interface Compiler version 5.10.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,9 +10,11 @@
 #define UI_MAINWIDGET_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QIcon>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QFrame>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
@@ -31,7 +33,7 @@ public:
     QPushButton *ButtonDraw;
     QFrame *line;
     QPushButton *ButtonAutodraw;
-    QPushButton *ButtonSaveLoad;
+    QPushButton *ButtonLoad;
     QPushButton *ButtonQuit;
     QLabel *ImageView;
     QLabel *label;
@@ -53,6 +55,7 @@ public:
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         ButtonSettings = new QPushButton(verticalLayoutWidget);
         ButtonSettings->setObjectName(QStringLiteral("ButtonSettings"));
+        ButtonSettings->setFocusPolicy(Qt::NoFocus);
         QIcon icon1;
         icon1.addFile(QStringLiteral(":/res/icons/gear.ico"), QSize(), QIcon::Normal, QIcon::Off);
         ButtonSettings->setIcon(icon1);
@@ -63,6 +66,7 @@ public:
 
         ButtonStartStop = new QPushButton(verticalLayoutWidget);
         ButtonStartStop->setObjectName(QStringLiteral("ButtonStartStop"));
+        ButtonStartStop->setFocusPolicy(Qt::NoFocus);
         QIcon icon2;
         icon2.addFile(QStringLiteral(":/res/icons/play.ico"), QSize(), QIcon::Normal, QIcon::Off);
         ButtonStartStop->setIcon(icon2);
@@ -74,6 +78,7 @@ public:
         ButtonCapture = new QPushButton(verticalLayoutWidget);
         ButtonCapture->setObjectName(QStringLiteral("ButtonCapture"));
         ButtonCapture->setEnabled(false);
+        ButtonCapture->setFocusPolicy(Qt::NoFocus);
         QIcon icon3;
         icon3.addFile(QStringLiteral(":/res/icons/camera.ico"), QSize(), QIcon::Normal, QIcon::Off);
         ButtonCapture->setIcon(icon3);
@@ -85,6 +90,7 @@ public:
         ButtonDraw = new QPushButton(verticalLayoutWidget);
         ButtonDraw->setObjectName(QStringLiteral("ButtonDraw"));
         ButtonDraw->setEnabled(false);
+        ButtonDraw->setFocusPolicy(Qt::NoFocus);
         QIcon icon4;
         icon4.addFile(QStringLiteral(":/res/icons/paintbrush2.ico"), QSize(), QIcon::Normal, QIcon::Off);
         ButtonDraw->setIcon(icon4);
@@ -105,6 +111,7 @@ public:
         ButtonAutodraw = new QPushButton(verticalLayoutWidget);
         ButtonAutodraw->setObjectName(QStringLiteral("ButtonAutodraw"));
         ButtonAutodraw->setEnabled(false);
+        ButtonAutodraw->setFocusPolicy(Qt::NoFocus);
         QIcon icon5;
         icon5.addFile(QStringLiteral(":/res/icons/magicwand.ico"), QSize(), QIcon::Normal, QIcon::Off);
         ButtonAutodraw->setIcon(icon5);
@@ -113,19 +120,21 @@ public:
 
         verticalLayout->addWidget(ButtonAutodraw);
 
-        ButtonSaveLoad = new QPushButton(verticalLayoutWidget);
-        ButtonSaveLoad->setObjectName(QStringLiteral("ButtonSaveLoad"));
-        ButtonSaveLoad->setEnabled(false);
+        ButtonLoad = new QPushButton(verticalLayoutWidget);
+        ButtonLoad->setObjectName(QStringLiteral("ButtonLoad"));
+        ButtonLoad->setEnabled(true);
+        ButtonLoad->setFocusPolicy(Qt::NoFocus);
         QIcon icon6;
         icon6.addFile(QStringLiteral(":/res/icons/upload.ico"), QSize(), QIcon::Normal, QIcon::Off);
-        ButtonSaveLoad->setIcon(icon6);
-        ButtonSaveLoad->setIconSize(QSize(64, 64));
-        ButtonSaveLoad->setFlat(true);
+        ButtonLoad->setIcon(icon6);
+        ButtonLoad->setIconSize(QSize(64, 64));
+        ButtonLoad->setFlat(true);
 
-        verticalLayout->addWidget(ButtonSaveLoad);
+        verticalLayout->addWidget(ButtonLoad);
 
         ButtonQuit = new QPushButton(verticalLayoutWidget);
         ButtonQuit->setObjectName(QStringLiteral("ButtonQuit"));
+        ButtonQuit->setFocusPolicy(Qt::NoFocus);
         QIcon icon7;
         icon7.addFile(QStringLiteral(":/res/icons/power.ico"), QSize(), QIcon::Normal, QIcon::Off);
         ButtonQuit->setIcon(icon7);
@@ -153,6 +162,7 @@ public:
         QObject::connect(ButtonCapture, SIGNAL(clicked()), MainWidget, SLOT(ButtonCaptureClicked()));
         QObject::connect(ButtonDraw, SIGNAL(clicked()), MainWidget, SLOT(ButtonDrawClicked()));
         QObject::connect(ButtonQuit, SIGNAL(clicked()), MainWidget, SLOT(close()));
+        QObject::connect(ButtonLoad, SIGNAL(clicked()), MainWidget, SLOT(ButtonLoadClicked()));
 
         QMetaObject::connectSlotsByName(MainWidget);
     } // setupUi
@@ -165,7 +175,7 @@ public:
         ButtonCapture->setText(QString());
         ButtonDraw->setText(QString());
         ButtonAutodraw->setText(QString());
-        ButtonSaveLoad->setText(QString());
+        ButtonLoad->setText(QString());
         ButtonQuit->setText(QString());
         ImageView->setText(QString());
         label->setText(QString());

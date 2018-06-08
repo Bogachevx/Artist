@@ -32,6 +32,9 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QPushButton" name="ButtonSettings">
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -52,6 +55,9 @@
     </item>
     <item>
      <widget class="QPushButton" name="ButtonStartStop">
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -75,6 +81,9 @@
       <property name="enabled">
        <bool>false</bool>
       </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -97,6 +106,9 @@
      <widget class="QPushButton" name="ButtonDraw">
       <property name="enabled">
        <bool>false</bool>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
       </property>
       <property name="text">
        <string/>
@@ -137,6 +149,9 @@
       <property name="enabled">
        <bool>false</bool>
       </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -156,9 +171,12 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="ButtonSaveLoad">
+     <widget class="QPushButton" name="ButtonLoad">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
       </property>
       <property name="text">
        <string/>
@@ -180,6 +198,9 @@
     </item>
     <item>
      <widget class="QPushButton" name="ButtonQuit">
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -288,8 +309,8 @@
    <slot>ButtonCaptureClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>53</x>
-     <y>286</y>
+     <x>54</x>
+     <y>253</y>
     </hint>
     <hint type="destinationlabel">
      <x>81</x>
@@ -304,8 +325,8 @@
    <slot>ButtonDrawClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>43</x>
-     <y>380</y>
+     <x>44</x>
+     <y>336</y>
     </hint>
     <hint type="destinationlabel">
      <x>81</x>
@@ -320,12 +341,28 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>52</x>
-     <y>524</y>
+     <x>53</x>
+     <y>599</y>
     </hint>
     <hint type="destinationlabel">
      <x>55</x>
      <y>588</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ButtonLoad</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWidget</receiver>
+   <slot>ButtonLoadClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>66</x>
+     <y>489</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>428</y>
     </hint>
    </hints>
   </connection>
@@ -335,5 +372,6 @@
   <slot>ButtonDrawClicked()</slot>
   <slot>ButtonCaptureClicked()</slot>
   <slot>ButtonStartStopClicked()</slot>
+  <slot>ButtonLoadClicked()</slot>
  </slots>
 </ui>

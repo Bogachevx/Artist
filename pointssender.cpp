@@ -11,13 +11,18 @@ void PointsSender::UDP_Send(QByteArray datagram)
     QThread::msleep(50);
 }
 
-void PointsSender::sendPoints()
+void PointsSender::addPoint(cv::Point P, bool upstate)
 {
+    int dz = upstate?10:0;
+    Points.push_back(QString::number(P.x) + ":" +
+                     QString::number(P.y) + ":" + QString::number(dz) + ":\n");
+}
 
+void PointsSender::run()
+{
     for (uint i = 0; i < Contours.size(); i++)
     {
         addPoint(Contours[i][0], true);
-        qDebug() << "!2212";
         for (uint j = 0; j < Contours[i].size(); j++)
         {
             addPoint(Contours[i][j], false);
@@ -42,20 +47,6 @@ void PointsSender::sendPoints()
     }
     emit sendPercent(100);
     UDP_Send(QByteArray::fromStdString("-5"));
-
-}
-
-void PointsSender::addPoint(cv::Point P, bool upstate)
-{
-    int dz = upstate?10:0;
-    Points.push_back(QString::number(P.x) + ":" +
-                     QString::number(P.y) + ":" + QString::number(dz) + ":\n");// + "\n");
-}
-
-void PointsSender::run()
-{
-    qDebug() << "Cin3";
-    sendPoints();
 }
 
 void PointsSender::stop()

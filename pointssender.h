@@ -18,7 +18,6 @@ class PointsSender : public QThread
 public:
     PointsSender(std::vector<std::vector<cv::Point>> cont);
     void UDP_Send(QByteArray datagram);
-    void sendPoints();
 private:
     std::vector<std::vector<cv::Point>> Contours;
     std::vector<QString> Points;

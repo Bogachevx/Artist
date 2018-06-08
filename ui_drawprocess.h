@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'drawprocess.ui'
 **
-** Created by: Qt User Interface Compiler version 5.11.0
+** Created by: Qt User Interface Compiler version 5.10.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,8 +10,10 @@
 #define UI_DRAWPROCESS_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QIcon>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
@@ -24,7 +26,7 @@ class Ui_DrawProcess
 public:
     QProgressBar *sendingProgress;
     QLabel *label;
-    QPushButton *ButtonCancelDraw;
+    QPushButton *ButtonCancel;
 
     void setupUi(QWidget *DrawProcess)
     {
@@ -39,17 +41,17 @@ public:
         label = new QLabel(DrawProcess);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(10, 10, 61, 16));
-        ButtonCancelDraw = new QPushButton(DrawProcess);
-        ButtonCancelDraw->setObjectName(QStringLiteral("ButtonCancelDraw"));
-        ButtonCancelDraw->setGeometry(QRect(110, 70, 89, 72));
+        ButtonCancel = new QPushButton(DrawProcess);
+        ButtonCancel->setObjectName(QStringLiteral("ButtonCancel"));
+        ButtonCancel->setGeometry(QRect(190, 70, 89, 72));
         QIcon icon;
         icon.addFile(QStringLiteral(":/res/icons/denied.ico"), QSize(), QIcon::Normal, QIcon::Off);
-        ButtonCancelDraw->setIcon(icon);
-        ButtonCancelDraw->setIconSize(QSize(64, 64));
-        ButtonCancelDraw->setFlat(true);
+        ButtonCancel->setIcon(icon);
+        ButtonCancel->setIconSize(QSize(64, 64));
+        ButtonCancel->setFlat(true);
 
         retranslateUi(DrawProcess);
-        QObject::connect(ButtonCancelDraw, SIGNAL(clicked()), DrawProcess, SLOT(ButtonCancelDrawClicked()));
+        QObject::connect(ButtonCancel, SIGNAL(clicked()), DrawProcess, SLOT(ButtonCancelClicked()));
 
         QMetaObject::connectSlotsByName(DrawProcess);
     } // setupUi
@@ -58,7 +60,7 @@ public:
     {
         DrawProcess->setWindowTitle(QApplication::translate("DrawProcess", "Sending...", nullptr));
         label->setText(QApplication::translate("DrawProcess", "Points sent:", nullptr));
-        ButtonCancelDraw->setText(QString());
+        ButtonCancel->setText(QString());
     } // retranslateUi
 
 };

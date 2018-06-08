@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'drawprocess.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.11.0)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.10.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,7 +12,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'drawprocess.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.11.0. It"
+#error "This file was generated using the moc from 5.10.1. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_DrawProcess_t {
     QByteArrayData data[6];
-    char stringdata0[81];
+    char stringdata0[68];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,16 +32,15 @@ struct qt_meta_stringdata_DrawProcess_t {
 static const qt_meta_stringdata_DrawProcess_t qt_meta_stringdata_DrawProcess = {
     {
 QT_MOC_LITERAL(0, 0, 11), // "DrawProcess"
-QT_MOC_LITERAL(1, 12, 19), // "cancelButtonClicked"
-QT_MOC_LITERAL(2, 32, 0), // ""
-QT_MOC_LITERAL(3, 33, 23), // "ButtonCancelDrawClicked"
-QT_MOC_LITERAL(4, 57, 19), // "setProgressBarValue"
-QT_MOC_LITERAL(5, 77, 3) // "val"
+QT_MOC_LITERAL(1, 12, 10), // "CancelDraw"
+QT_MOC_LITERAL(2, 23, 0), // ""
+QT_MOC_LITERAL(3, 24, 19), // "ButtonCancelClicked"
+QT_MOC_LITERAL(4, 44, 19), // "setProgressBarValue"
+QT_MOC_LITERAL(5, 64, 3) // "val"
 
     },
-    "DrawProcess\0cancelButtonClicked\0\0"
-    "ButtonCancelDrawClicked\0setProgressBarValue\0"
-    "val"
+    "DrawProcess\0CancelDraw\0\0ButtonCancelClicked\0"
+    "setProgressBarValue\0val"
 };
 #undef QT_MOC_LITERAL
 
@@ -81,16 +80,16 @@ void DrawProcess::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         DrawProcess *_t = static_cast<DrawProcess *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->cancelButtonClicked(); break;
-        case 1: _t->ButtonCancelDrawClicked(); break;
+        case 0: _t->CancelDraw(); break;
+        case 1: _t->ButtonCancelClicked(); break;
         case 2: _t->setProgressBarValue((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (DrawProcess::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&DrawProcess::cancelButtonClicked)) {
+            typedef void (DrawProcess::*_t)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&DrawProcess::CancelDraw)) {
                 *result = 0;
                 return;
             }
@@ -135,7 +134,7 @@ int DrawProcess::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void DrawProcess::cancelButtonClicked()
+void DrawProcess::CancelDraw()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }

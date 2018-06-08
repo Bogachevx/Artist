@@ -10,15 +10,10 @@ MainWidget::MainWidget(QWidget *parent) :
     isStarted = false;
     isCaptured = false;
     udpSocket = new QUdpSocket();
-    udpRecvSocket = new QUdpSocket();
-    udpRecvSocket->bind(49153, QUdpSocket::ShareAddress);
-    connect(udpRecvSocket, SIGNAL(readyRead()),
-            this, SLOT(processPendingDatagrams()));
-    recievedData = "";
 
     QDesktopWidget *d = QApplication::desktop();
-    int cur_x = d->width();     // returns desktop width
-    int cur_y = d->height();    // returns desktop height
+    int cur_x = d->width();
+    int cur_y = d->height();
     int sizew = cur_x - ui->ImageView->x() - 5;
     int sizeh = cur_y - ui->ImageView->y() - 5;
     ui->ImageView->resize(sizew, sizeh);
@@ -76,9 +71,21 @@ cv::Rect MainWidget::getROIRect(cv::Mat *frame)
 
 void MainWidget::ProcessImage()
 {
-
-    cv::Mat temp(Frame, getROIRect(&Frame));
-    cv::Mat ROI = temp.clone();
+    cv::Mat ROI;
+    if(isLoaded)
+    {
+        ROI = Frame.clone();
+    }
+    else
+    {
+        cv::Mat temp(Frame, getROIRect(&Frame));
+        ROI = temp.clone();
+    }
+    if (ROI.cols > ROI.rows)
+    {
+        cv::rotate(ROI,ROI, cv::ROTATE_90_CLOCKWISE);
+    }
+    cv::flip(ROI, ROI, 0);
     std::vector<std::vector<cv::Point>> contours;
     std::vector<std::vector<cv::Point>> smallcontours;
     double scaleX = (double)ProgramSettings.paperSize.Width/ ROI.cols;
@@ -128,6 +135,13 @@ void MainWidget::ProcessImage()
     }
     //cv::imshow("ewe", ROIScaled);
     Contours = smallcontours;
+    cv::flip(ROI, ROI, 0);
+    //cv::imshow("wss", ROI);
+    cv::resize(ROI,ROI,cv::Size((ROI.cols/20)*20, (ROI.rows/20)*20));
+    while (ROI.cols > 1000 || ROI.rows > 1000)
+    {
+        cv::resize(ROI, ROI, cv::Size(ROI.cols/2, ROI.rows/2));
+    }
     ui->ImageView->setPixmap(QPixmap::fromImage(QImage((unsigned char*) ROI.data,
                 ROI.cols, ROI.rows, QImage::Format_RGB888)));
 }
@@ -211,18 +225,18 @@ void MainWidget::ButtonStartStopClicked()
 
         isCaptured = false;
         isDrawing = false;
+        isLoaded = false;
 
-        camera = new CameraThread(ProgramSettings.cameraAddress);
+        camera = new CameraThread(ProgramSettings);
         connect(camera, SIGNAL(Ready(cv::Mat * ,cv::Mat *)), this, SLOT(FrameReady(cv::Mat * ,cv::Mat *)));
         connect(camera, SIGNAL(Error()), this, SLOT(Error()));
 
-        camera->setCameraResolution(ProgramSettings.cameraResolution);
-        camera->setProgramSettings(ProgramSettings);
         camera->start();
         qDebug() << camera->isRunning();
         ui->ButtonStartStop->setIcon(QIcon(":res/icons/denied.ico"));
         ui->ButtonCapture->setEnabled(true);
         ui->ButtonDraw->setEnabled(false);
+        ui->ButtonLoad->setEnabled(false);
     }
     else
     {
@@ -239,6 +253,7 @@ void MainWidget::ButtonStartStopClicked()
 
         ui->ButtonStartStop->setIcon(QIcon(":res/icons/play.ico"));
         ui->ButtonCapture->setEnabled(false);
+        ui->ButtonLoad->setEnabled(true);
     }
     isStarted = !isStarted;
 
@@ -254,7 +269,7 @@ void MainWidget::ButtonSettingsClicked()
 
     connect(SettingsWindow, SIGNAL(Apply(SettingsStruct)),
             this, SLOT(SettingsApplied(SettingsStruct)));
-    if (!isStarted && isCaptured)
+    if ((!isStarted && isCaptured) || isLoaded)
     {
         connect(SettingsWindow, SIGNAL(EmitUpdate(int*,int*,int*,int*,int*)), this, SLOT(Update(int*,int*,int*,int*,int*)));
     }
@@ -273,12 +288,12 @@ void MainWidget::ButtonDrawClicked()
         pointsSender->start();
 
         connect(pointsSender, SIGNAL(sendPercent(int)), dp, SLOT(setProgressBarValue(int)));
-        connect(dp, SIGNAL(cancelButtonClicked()), this, SLOT(cancelDrawButtonClicked()));
+        connect(dp, SIGNAL(CancelDraw()), this, SLOT(ButtonCancelDrawClicked()));
         dp->show();
         isDrawing = true;
 }
 
-void MainWidget::cancelDrawButtonClicked()
+void MainWidget::ButtonCancelDrawClicked()
 {
     pointsSender->stop();
     dp->close();
@@ -287,6 +302,20 @@ void MainWidget::cancelDrawButtonClicked()
     delete(pointsSender);   
     UDP_Send(QByteArray::number(-10));
 
+}
+
+void MainWidget::ButtonLoadClicked()
+{
+    QString str = QFileDialog::getOpenFileName(0, "Open Dialog", "", "*.jpeg *.jpg *.png");
+    Frame = cv::imread(str.toStdString(), cv::IMREAD_GRAYSCALE);
+    if (Frame.empty())
+    {
+        return;
+    }
+    isLoaded = true;
+    ui->ButtonDraw->setEnabled(true);
+    cv::cvtColor(Frame,Frame,CV_GRAY2BGR);
+    ProcessImage();
 }
 /*
 void MainWidget::processPendingDatagrams()
@@ -329,9 +358,8 @@ void MainWidget::FrameReady(cv::Mat *frame, cv::Mat *orig)
 
 void MainWidget::Update(int *thresh1, int *thresh2, int *blur, int *as, int *mcl)
 {
-    if (isCaptured)
+    if (isCaptured || isLoaded)
     {
-
         ProgramSettings.processSettings.Threshold1 = *thresh1;
         ProgramSettings.processSettings.Threshold2 = *thresh2;
         ProgramSettings.blurValue = *blur;

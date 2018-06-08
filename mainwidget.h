@@ -7,6 +7,7 @@
 #include <QThread>
 #include <QKeyEvent>
 #include <QtNetwork/QUdpSocket>
+#include <QFileDialog>
 #include <fstream>
 
 #include <opencv2/imgproc.hpp>
@@ -32,23 +33,31 @@ public:
 
 private:
     Ui::MainWidget *ui;
-    SettingsStruct ProgramSettings;
+    // Widgets
     Settings *SettingsWindow;
-    CameraThread *camera;
-    PointsSender *pointsSender;
     DrawProcess *dp;
+
+    // OpenCV
     cv::Mat Frame;
     std::vector<std::vector<cv::Point>> Contours;
-    QUdpSocket *udpSocket;
-    QUdpSocket *udpRecvSocket;
-    bool isStarted;
-    bool isCaptured;
+
+    // Flags
+    bool isStarted = false;
+    bool isCaptured = false;
+    bool isLoaded = false;
     bool isDrawing = false;
     bool autoMode;
-    void LoadSettings();
+
+    // Threads
+    CameraThread *camera;
+    PointsSender *pointsSender;
+
+    SettingsStruct ProgramSettings;
+    QUdpSocket *udpSocket;
+
     cv::Rect getROIRect(cv::Mat *frame);
     cv::Rect cutRect(cv::Rect rect);
-    QString recievedData;
+    void LoadSettings();
     void ProcessImage();
     void UDP_Send(QByteArray datagram);
 
@@ -57,15 +66,21 @@ protected:
     void keyReleaseEvent(QKeyEvent *e);
 
 private slots:
+
+    // Button events
     void ButtonCaptureClicked();
     void ButtonStartStopClicked();
     void ButtonSettingsClicked();
     void ButtonDrawClicked();
-    void cancelDrawButtonClicked();
-    //void processPendingDatagrams();
+    void ButtonCancelDrawClicked(); // Not this widget button
+    void ButtonLoadClicked();
+
+    // From Settings
     void SettingsApplied(SettingsStruct settings);
-    void FrameReady(cv::Mat *frame, cv::Mat *orig);
     void Update( int*, int*, int*, int*, int*);
+
+    // From CameraThread
+    void FrameReady(cv::Mat *frame, cv::Mat *orig);
     void Error();
 };
 

@@ -25,9 +25,7 @@ protected:
 
 public:
     void stop();
-    void setCameraResolution(mSize Resolution);
-    void setProgramSettings(SettingsStruct settings);
-    CameraThread(int cameraAddress);
+    CameraThread(SettingsStruct settings);
 };
 
 #endif // CAMERATHREAD_H
