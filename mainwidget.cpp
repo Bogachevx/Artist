@@ -301,6 +301,8 @@ void MainWidget::ButtonCancelDrawClicked()
     delete(dp);
     delete(pointsSender);   
     UDP_Send(QByteArray::number(-10));
+    UDP_Send(QByteArray::number(-10));
+    //UDP_Send(QByteArray::number(-20));
 
 }
 

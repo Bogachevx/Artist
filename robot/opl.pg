@@ -1,0 +1,79 @@
+.PROGRAM opl() #0
+  k = 0 ; Drawing iterator
+  op_flag = -1 ; Operation flag
+  ;cor_spd = 10
+  dip = FALSE
+  $Percent = ""
+  
+  ; isPainting - true, while drawing
+  
+  WHILE TRUE DO
+	; Aiming robot to photo place
+    IF op_flag==1 THEN
+      JMOVE #aim_point
+      op_flag = -1
+    END
+	; Returning to home point
+    IF op_flag==2 THEN
+      JMOVE #home_point
+      op_flag = -1
+    END
+	; Drawing
+    IF op_flag==3 THEN
+	  if dip == TRUE THEN
+		LMOVE #dip_point1
+		LMOVE #dip_point2
+		LMOVE #dip_point3
+		LMOVE #dip_point4
+		LMOVE #dip_point5
+		dip = FALSE
+		; dip brush
+	  END
+	  ; If still got points - draw
+      IF k<real_length THEN
+        LMOVE TRANS(tr_val[k,0],tr_val[k,1],tr_val[k,2])+startp
+		k = k+1
+		$Percent = $ENCODE(/F6.2, k*100/sent_length) + " %"
+	  ; Returning to home point after finishing
+	  ELSE
+		JMOVE #endp
+		JMOVE #home_point
+		isPainting = false	
+		$State =  "STOP"
+		k = 0
+		op_flag = -1
+	  END
+	END
+	
+	
+	; Break drawing cycle
+	IF op_flag==10 THEN
+		if isPainting == true
+			break
+			JMOVE #endp
+			JMOVE #home_point
+			k = 0
+			op_flag = -1
+		END
+		$Percent = ""
+		$Uploaded = ""
+		op_flag = -1
+	END
+	
+	; --------------------------
+	IF direction == 8 THEN
+		DRAW  ,,cor_spd 	
+	END
+	IF direction == 5 THEN
+		DRAW  ,,-cor_spd 	
+	END
+	IF direction == 6 THEN
+		DRAW  ,cor_spd 	
+	END
+	IF direction == 4 THEN
+		DRAW  ,-cor_spd 	
+	END
+	; --------------------------
+  END
+  
+.END

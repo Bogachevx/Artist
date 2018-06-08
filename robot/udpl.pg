@@ -1,0 +1,100 @@
+.PROGRAM udpl() #4
+
+  IF TASK(1) <> 1 THEN
+	MC execute opl 
+  END
+  
+  ispainting = FALSE;
+  real_length = 0 ; Amount of drawing points
+  sent_length = 0
+  direction = -1; for codes look at the numpad
+  isfinished = FALSE
+  $State = ""
+  $Uploaded = ""
+  
+  
+  WHILE TRUE DO
+  
+    UDP_RECVFROM ret,49152,$cnt[0],p,2
+	
+    IF $cnt[0]=="-1" THEN
+      $State = "AIMING"
+      op_flag = 1
+      $cnt[0] = ""
+    END
+	
+    IF $cnt[0]=="-2" THEN
+      $State =  "GO BACK"
+      op_flag = 2
+      $cnt[0] = ""
+    END
+	
+    IF $cnt[0]=="-3" THEN
+      $State =  "PAINTING"
+	  UDP_RECVFROM ret,49152,$cnt[0],p,3
+	  sent_length = VAL($cnt[0])
+      ispainting = TRUE
+	  ;dip = TRUE
+      real_length = 0
+      $cnt[0] = ""
+    END
+	
+    IF $cnt[0]=="-10" THEN
+      $State =  "STOP"
+	  op_flag = 10
+      $cnt[0] = ""
+    END
+	
+    IF $cnt[0]=="-5" THEN
+      TYPE "FINISHED DATA RECIEVING"
+      $cnt[0] = ""
+    END
+	
+	; -----------------------------------
+	
+	IF $cnt[0]=="U" THEN
+      $State = "CORRECTION"
+	  direction = 8
+      $cnt[0] = ""
+    END
+	
+	IF $cnt[0]=="D" THEN
+      $State = "CORRECTION"
+	  direction = 5
+      $cnt[0] = ""
+    END
+	
+	IF $cnt[0]=="R" THEN
+      $State = "CORRECTION"
+	  direction = 6
+      $cnt[0] = ""
+    END
+	
+	IF $cnt[0]=="L" THEN
+      $State = "CORRECTION"
+	  direction = 4
+      $cnt[0] = ""
+    END
+	
+	IF $cnt[0]=="B" THEN
+      $State = "CORRECTION"
+	  direction = -1
+      $cnt[0] = ""
+    END
+	
+	; --------------------------
+	
+    IF LEN($cnt[0])>5 THEN
+      FOR i = 0 TO 2 STEP 1
+        $temp = $DECODE($cnt[0],":",0)
+        tr_val[real_length,i] = VAL($temp)
+        $temp = $DECODE($cnt[0],":",1)
+      END
+      IF real_length*100/sent_length > 5 THEN; real_length==50 THEN
+        op_flag = 3
+      END
+      real_length = real_length+1
+	  $Uploaded = $ENCODE(/F6.2, real_length*100/sent_length) + " %"
+    END
+  END
+.END
