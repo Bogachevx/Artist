@@ -3,3 +3,15 @@
 *.dll
 *.exe
 *.o
+debug/moc_camerathread.cpp
+debug/moc_drawprocess.cpp
+debug/moc_mainwidget.cpp
+*.h
+debug/moc_pointssender.cpp
+debug/moc_settings.cpp
+debug/qrc_resources.cpp
+Makefile
+Makefile.Debug
+Makefile.Release
+*.exe
+Makefile.Debug
