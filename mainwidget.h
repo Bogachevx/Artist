@@ -8,7 +8,7 @@
 #include <QKeyEvent>
 #include <QtNetwork/QUdpSocket>
 #include <QFileDialog>
-#include <QTime>
+#include <QDateTime>
 #include <fstream>
 
 #include <opencv2/imgproc.hpp>

@@ -336,8 +336,8 @@ void MainWidget::ButtonDrawClicked()
     }
     else
     {
-        QTime Ti;
-        Ti = QTime::currentTime();
+        QDateTime Ti;
+        Ti = QDateTime::currentDateTime();
         QString timestr;
         if (!QDir("pics").exists())
         {
