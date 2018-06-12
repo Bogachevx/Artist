@@ -16,6 +16,9 @@
   <property name="windowTitle">
    <string>Sending...</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 255, 255);</string>
+  </property>
   <widget class="QProgressBar" name="sendingProgress">
    <property name="geometry">
     <rect>
@@ -24,6 +27,11 @@
      <width>300</width>
      <height>23</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+    </font>
    </property>
    <property name="value">
     <number>24</number>
@@ -38,6 +46,11 @@
      <height>16</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+    </font>
+   </property>
    <property name="text">
     <string>Points sent:</string>
    </property>
@@ -50,6 +63,11 @@
      <width>89</width>
      <height>72</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+    </font>
    </property>
    <property name="text">
     <string/>

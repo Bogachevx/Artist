@@ -38,6 +38,11 @@
      <height>71</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);</string>
    </property>
@@ -50,12 +55,22 @@
       <x>10</x>
       <y>20</y>
       <width>160</width>
-      <height>41</height>
+      <height>44</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Comic Sans MS</family>
+     </font>
     </property>
     <layout class="QGridLayout" name="gridLayout_2">
      <item row="0" column="0">
       <widget class="QLabel" name="label_3">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+        </font>
+       </property>
        <property name="text">
         <string>Width:</string>
        </property>
@@ -63,6 +78,11 @@
      </item>
      <item row="1" column="0">
       <widget class="QLineEdit" name="PaperWidth">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+        </font>
+       </property>
        <property name="text">
         <string>300</string>
        </property>
@@ -70,6 +90,11 @@
      </item>
      <item row="1" column="1">
       <widget class="QLineEdit" name="PaperHeight">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+        </font>
+       </property>
        <property name="text">
         <string>600</string>
        </property>
@@ -77,6 +102,11 @@
      </item>
      <item row="0" column="1">
       <widget class="QLabel" name="label_4">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+        </font>
+       </property>
        <property name="text">
         <string>Height:</string>
        </property>
@@ -94,6 +124,11 @@
      <height>101</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);</string>
    </property>
@@ -109,6 +144,11 @@
       <height>71</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Comic Sans MS</family>
+     </font>
+    </property>
     <property name="title">
      <string>Camera address:</string>
     </property>
@@ -121,9 +161,20 @@
        <height>41</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Comic Sans MS</family>
+      </font>
+     </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QComboBox" name="CameraAddress"/>
+       <widget class="QComboBox" name="CameraAddress">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+         </font>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -137,6 +188,11 @@
       <height>71</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Comic Sans MS</family>
+     </font>
+    </property>
     <property name="title">
      <string>Active region size:</string>
     </property>
@@ -146,12 +202,22 @@
        <x>10</x>
        <y>20</y>
        <width>160</width>
-       <height>41</height>
+       <height>44</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Comic Sans MS</family>
+      </font>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="0">
        <widget class="QLabel" name="label_5">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+         </font>
+        </property>
         <property name="text">
          <string>Width:</string>
         </property>
@@ -159,6 +225,11 @@
       </item>
       <item row="0" column="1">
        <widget class="QLabel" name="label_6">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+         </font>
+        </property>
         <property name="text">
          <string>Height:</string>
         </property>
@@ -166,6 +237,11 @@
       </item>
       <item row="1" column="0">
        <widget class="QLineEdit" name="ActiveRegionWidth">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+         </font>
+        </property>
         <property name="text">
          <string>400</string>
         </property>
@@ -173,6 +249,11 @@
       </item>
       <item row="1" column="1">
        <widget class="QLineEdit" name="ActveRegionHeight">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+         </font>
+        </property>
         <property name="text">
          <string>900</string>
         </property>
@@ -190,6 +271,11 @@
       <height>71</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Comic Sans MS</family>
+     </font>
+    </property>
     <property name="title">
      <string>Camera resolution:</string>
     </property>
@@ -199,12 +285,22 @@
        <x>10</x>
        <y>20</y>
        <width>160</width>
-       <height>41</height>
+       <height>44</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Comic Sans MS</family>
+      </font>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
        <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+         </font>
+        </property>
         <property name="text">
          <string>Width:</string>
         </property>
@@ -212,6 +308,11 @@
       </item>
       <item row="0" column="1">
        <widget class="QLabel" name="label_2">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+         </font>
+        </property>
         <property name="text">
          <string>Height:</string>
         </property>
@@ -219,6 +320,11 @@
       </item>
       <item row="1" column="0">
        <widget class="QLineEdit" name="CameraWidth">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+         </font>
+        </property>
         <property name="text">
          <string>1280</string>
         </property>
@@ -226,6 +332,11 @@
       </item>
       <item row="1" column="1">
        <widget class="QLineEdit" name="CameraHeight">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+         </font>
+        </property>
         <property name="text">
          <string>1024</string>
         </property>
@@ -244,6 +355,11 @@
      <height>231</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);</string>
    </property>
@@ -259,6 +375,11 @@
       <height>71</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Comic Sans MS</family>
+     </font>
+    </property>
     <property name="title">
      <string>Blur level:</string>
     </property>
@@ -271,9 +392,20 @@
        <height>41</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Comic Sans MS</family>
+      </font>
+     </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QComboBox" name="BlurValue"/>
+       <widget class="QComboBox" name="BlurValue">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+         </font>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -287,6 +419,11 @@
       <height>101</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Comic Sans MS</family>
+     </font>
+    </property>
     <property name="title">
      <string>Canny settings:</string>
     </property>
@@ -299,11 +436,21 @@
        <height>71</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Comic Sans MS</family>
+      </font>
+     </property>
      <layout class="QFormLayout" name="formLayout_2">
       <item row="0" column="0" colspan="2">
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
          <widget class="QLabel" name="label_7">
+          <property name="font">
+           <font>
+            <family>Comic Sans MS</family>
+           </font>
+          </property>
           <property name="text">
            <string>Threshold 1:</string>
           </property>
@@ -323,13 +470,23 @@
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Comic Sans MS</family>
+           </font>
+          </property>
           <property name="text">
-           <string>TextLabel</string>
+           <string>1</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QSlider" name="Threshold2">
+          <property name="font">
+           <font>
+            <family>Comic Sans MS</family>
+           </font>
+          </property>
           <property name="minimum">
            <number>1</number>
           </property>
@@ -350,6 +507,11 @@
        <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
          <widget class="QLabel" name="label_8">
+          <property name="font">
+           <font>
+            <family>Comic Sans MS</family>
+           </font>
+          </property>
           <property name="text">
            <string>Threshold 2:</string>
           </property>
@@ -369,13 +531,23 @@
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Comic Sans MS</family>
+           </font>
+          </property>
           <property name="text">
-           <string>TextLabel</string>
+           <string>1</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QSlider" name="Threshold1">
+          <property name="font">
+           <font>
+            <family>Comic Sans MS</family>
+           </font>
+          </property>
           <property name="minimum">
            <number>1</number>
           </property>
@@ -404,6 +576,11 @@
       <height>91</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Comic Sans MS</family>
+     </font>
+    </property>
     <property name="title">
      <string>Approximation</string>
     </property>
@@ -416,9 +593,19 @@
        <height>31</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Comic Sans MS</family>
+      </font>
+     </property>
      <layout class="QHBoxLayout" name="horizontalLayout_6">
       <item>
        <widget class="QLabel" name="label_11">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+         </font>
+        </property>
         <property name="text">
          <string>Approx. epsilon:</string>
         </property>
@@ -438,13 +625,23 @@
           <height>16777215</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+         </font>
+        </property>
         <property name="text">
-         <string>TextLabel</string>
+         <string>0.01</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QSlider" name="ApproxEpsilon">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+         </font>
+        </property>
         <property name="minimum">
          <number>1</number>
         </property>
@@ -470,9 +667,19 @@
        <height>31</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Comic Sans MS</family>
+      </font>
+     </property>
      <layout class="QHBoxLayout" name="horizontalLayout_7">
       <item>
        <widget class="QLabel" name="label_13">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+         </font>
+        </property>
         <property name="text">
          <string>Minimum cont. length:</string>
         </property>
@@ -492,15 +699,25 @@
           <height>16777215</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+         </font>
+        </property>
         <property name="text">
-         <string>TextLabel</string>
+         <string>2</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QSlider" name="MinContLen">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+         </font>
+        </property>
         <property name="minimum">
-         <number>0</number>
+         <number>2</number>
         </property>
         <property name="maximum">
          <number>50</number>
@@ -526,6 +743,11 @@
      <height>91</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);</string>
    </property>
@@ -544,9 +766,19 @@
       <height>74</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Comic Sans MS</family>
+     </font>
+    </property>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <widget class="QPushButton" name="ButtonCancel">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+        </font>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -567,6 +799,11 @@
      </item>
      <item>
       <widget class="QPushButton" name="ButtonApply">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+        </font>
+       </property>
        <property name="text">
         <string/>
        </property>

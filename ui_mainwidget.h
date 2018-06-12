@@ -32,7 +32,7 @@ public:
     QPushButton *ButtonCapture;
     QPushButton *ButtonDraw;
     QFrame *line;
-    QPushButton *ButtonAutodraw;
+    QPushButton *ButtonDemo;
     QPushButton *ButtonLoad;
     QPushButton *ButtonQuit;
     QLabel *ImageView;
@@ -50,11 +50,15 @@ public:
         verticalLayoutWidget = new QWidget(MainWidget);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
         verticalLayoutWidget->setGeometry(QRect(0, 10, 91, 601));
+        QFont font;
+        font.setFamily(QStringLiteral("Comic Sans MS"));
+        verticalLayoutWidget->setFont(font);
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         ButtonSettings = new QPushButton(verticalLayoutWidget);
         ButtonSettings->setObjectName(QStringLiteral("ButtonSettings"));
+        ButtonSettings->setFont(font);
         ButtonSettings->setFocusPolicy(Qt::NoFocus);
         QIcon icon1;
         icon1.addFile(QStringLiteral(":/res/icons/gear.ico"), QSize(), QIcon::Normal, QIcon::Off);
@@ -66,6 +70,7 @@ public:
 
         ButtonStartStop = new QPushButton(verticalLayoutWidget);
         ButtonStartStop->setObjectName(QStringLiteral("ButtonStartStop"));
+        ButtonStartStop->setFont(font);
         ButtonStartStop->setFocusPolicy(Qt::NoFocus);
         QIcon icon2;
         icon2.addFile(QStringLiteral(":/res/icons/play.ico"), QSize(), QIcon::Normal, QIcon::Off);
@@ -78,6 +83,7 @@ public:
         ButtonCapture = new QPushButton(verticalLayoutWidget);
         ButtonCapture->setObjectName(QStringLiteral("ButtonCapture"));
         ButtonCapture->setEnabled(false);
+        ButtonCapture->setFont(font);
         ButtonCapture->setFocusPolicy(Qt::NoFocus);
         QIcon icon3;
         icon3.addFile(QStringLiteral(":/res/icons/camera.ico"), QSize(), QIcon::Normal, QIcon::Off);
@@ -90,6 +96,7 @@ public:
         ButtonDraw = new QPushButton(verticalLayoutWidget);
         ButtonDraw->setObjectName(QStringLiteral("ButtonDraw"));
         ButtonDraw->setEnabled(false);
+        ButtonDraw->setFont(font);
         ButtonDraw->setFocusPolicy(Qt::NoFocus);
         QIcon icon4;
         icon4.addFile(QStringLiteral(":/res/icons/paintbrush2.ico"), QSize(), QIcon::Normal, QIcon::Off);
@@ -101,6 +108,7 @@ public:
 
         line = new QFrame(verticalLayoutWidget);
         line->setObjectName(QStringLiteral("line"));
+        line->setFont(font);
         line->setFrameShadow(QFrame::Sunken);
         line->setLineWidth(0);
         line->setMidLineWidth(10);
@@ -108,21 +116,23 @@ public:
 
         verticalLayout->addWidget(line);
 
-        ButtonAutodraw = new QPushButton(verticalLayoutWidget);
-        ButtonAutodraw->setObjectName(QStringLiteral("ButtonAutodraw"));
-        ButtonAutodraw->setEnabled(false);
-        ButtonAutodraw->setFocusPolicy(Qt::NoFocus);
+        ButtonDemo = new QPushButton(verticalLayoutWidget);
+        ButtonDemo->setObjectName(QStringLiteral("ButtonDemo"));
+        ButtonDemo->setEnabled(true);
+        ButtonDemo->setFont(font);
+        ButtonDemo->setFocusPolicy(Qt::NoFocus);
         QIcon icon5;
-        icon5.addFile(QStringLiteral(":/res/icons/magicwand.ico"), QSize(), QIcon::Normal, QIcon::Off);
-        ButtonAutodraw->setIcon(icon5);
-        ButtonAutodraw->setIconSize(QSize(64, 64));
-        ButtonAutodraw->setFlat(true);
+        icon5.addFile(QStringLiteral(":/res/icons/hourglass.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        ButtonDemo->setIcon(icon5);
+        ButtonDemo->setIconSize(QSize(64, 64));
+        ButtonDemo->setFlat(true);
 
-        verticalLayout->addWidget(ButtonAutodraw);
+        verticalLayout->addWidget(ButtonDemo);
 
         ButtonLoad = new QPushButton(verticalLayoutWidget);
         ButtonLoad->setObjectName(QStringLiteral("ButtonLoad"));
         ButtonLoad->setEnabled(true);
+        ButtonLoad->setFont(font);
         ButtonLoad->setFocusPolicy(Qt::NoFocus);
         QIcon icon6;
         icon6.addFile(QStringLiteral(":/res/icons/upload.ico"), QSize(), QIcon::Normal, QIcon::Off);
@@ -134,6 +144,7 @@ public:
 
         ButtonQuit = new QPushButton(verticalLayoutWidget);
         ButtonQuit->setObjectName(QStringLiteral("ButtonQuit"));
+        ButtonQuit->setFont(font);
         ButtonQuit->setFocusPolicy(Qt::NoFocus);
         QIcon icon7;
         icon7.addFile(QStringLiteral(":/res/icons/power.ico"), QSize(), QIcon::Normal, QIcon::Off);
@@ -146,12 +157,14 @@ public:
         ImageView = new QLabel(MainWidget);
         ImageView->setObjectName(QStringLiteral("ImageView"));
         ImageView->setGeometry(QRect(90, 10, 800, 681));
-        ImageView->setStyleSheet(QStringLiteral("background-color: rgb(206, 30, 37, 255);"));
+        ImageView->setFont(font);
+        ImageView->setStyleSheet(QStringLiteral("background-color: rgb(163, 163, 163);"));
         ImageView->setScaledContents(false);
         ImageView->setAlignment(Qt::AlignCenter);
         label = new QLabel(MainWidget);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(110, 20, 261, 86));
+        label->setFont(font);
         label->setStyleSheet(QStringLiteral("background-color: rgba(255, 255, 255, 0);"));
         label->setPixmap(QPixmap(QString::fromUtf8(":/res/icons/robowizard__logo.ico")));
         label->setScaledContents(false);
@@ -163,6 +176,7 @@ public:
         QObject::connect(ButtonDraw, SIGNAL(clicked()), MainWidget, SLOT(ButtonDrawClicked()));
         QObject::connect(ButtonQuit, SIGNAL(clicked()), MainWidget, SLOT(close()));
         QObject::connect(ButtonLoad, SIGNAL(clicked()), MainWidget, SLOT(ButtonLoadClicked()));
+        QObject::connect(ButtonDemo, SIGNAL(clicked()), MainWidget, SLOT(ButtonDemoClicked()));
 
         QMetaObject::connectSlotsByName(MainWidget);
     } // setupUi
@@ -174,7 +188,7 @@ public:
         ButtonStartStop->setText(QString());
         ButtonCapture->setText(QString());
         ButtonDraw->setText(QString());
-        ButtonAutodraw->setText(QString());
+        ButtonDemo->setText(QString());
         ButtonLoad->setText(QString());
         ButtonQuit->setText(QString());
         ImageView->setText(QString());

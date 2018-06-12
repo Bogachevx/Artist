@@ -128,23 +128,24 @@ compiler_rcc_clean:
 	-$(DEL_FILE) debug\qrc_resources.cpp
 debug/qrc_resources.cpp: resources.qrc \
 		../../Qt/5.10.1/mingw53_32/bin/rcc.exe \
-		icons/power.ico \
-		icons/brushpencil.ico \
-		icons/pin2.ico \
-		icons/x.ico \
-		icons/check.ico \
-		icons/robowizard__logo.ico \
-		icons/denied.ico \
 		icons/gear.ico \
-		icons/flash.ico \
-		icons/download.ico \
-		icons/paintbrush2.ico \
-		icons/magicwand.ico \
+		icons/power.ico \
 		icons/stop.ico \
-		icons/camera.ico \
-		icons/play.ico \
+		icons/hourglass.ico \
+		icons/paintbrush2.ico \
 		icons/upload.ico \
-		icons/magnifyingglass.ico
+		icons/play.ico \
+		icons/magnifyingglass.ico \
+		icons/download.ico \
+		icons/denied.ico \
+		icons/camera.ico \
+		icons/pin2.ico \
+		icons/flash.ico \
+		icons/robowizard__logo.ico \
+		icons/check.ico \
+		icons/x.ico \
+		icons/brushpencil.ico \
+		icons/magicwand.ico
 	C:\Qt\5.10.1\mingw53_32\bin\rcc.exe -name resources resources.qrc -o debug\qrc_resources.cpp
 
 compiler_moc_predefs_make_all: debug/moc_predefs.h
@@ -276,6 +277,8 @@ debug/moc_mainwidget.cpp: ../../Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qdir.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qfileinfo.h \
 		../../Qt/5.10.1/mingw53_32/include/QtWidgets/qdialog.h \
+		../../Qt/5.10.1/mingw53_32/include/QtCore/QTime \
+		../../Qt/5.10.1/mingw53_32/include/QtCore/qdatetime.h \
 		../../opencv3_build/install/include/opencv2/imgproc.hpp \
 		../../opencv3_build/install/include/opencv2/core.hpp \
 		../../opencv3_build/install/include/opencv2/core/cvdef.h \
@@ -346,7 +349,6 @@ debug/moc_mainwidget.cpp: ../../Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qcommandlineparser.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qcoreapplication.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qcryptographichash.h \
-		../../Qt/5.10.1/mingw53_32/include/QtCore/qdatetime.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qdeadlinetimer.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qelapsedtimer.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qdiriterator.h \
@@ -1299,6 +1301,8 @@ debug/main.o: main.cpp mainwidget.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qdir.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qfileinfo.h \
 		../../Qt/5.10.1/mingw53_32/include/QtWidgets/qdialog.h \
+		../../Qt/5.10.1/mingw53_32/include/QtCore/QTime \
+		../../Qt/5.10.1/mingw53_32/include/QtCore/qdatetime.h \
 		../../opencv3_build/install/include/opencv2/imgproc.hpp \
 		../../opencv3_build/install/include/opencv2/core.hpp \
 		../../opencv3_build/install/include/opencv2/core/cvdef.h \
@@ -1369,7 +1373,6 @@ debug/main.o: main.cpp mainwidget.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qcommandlineparser.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qcoreapplication.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qcryptographichash.h \
-		../../Qt/5.10.1/mingw53_32/include/QtCore/qdatetime.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qdeadlinetimer.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qelapsedtimer.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qdiriterator.h \
@@ -1605,6 +1608,8 @@ debug/mainwidget.o: mainwidget.cpp mainwidget.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qdir.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qfileinfo.h \
 		../../Qt/5.10.1/mingw53_32/include/QtWidgets/qdialog.h \
+		../../Qt/5.10.1/mingw53_32/include/QtCore/QTime \
+		../../Qt/5.10.1/mingw53_32/include/QtCore/qdatetime.h \
 		../../opencv3_build/install/include/opencv2/imgproc.hpp \
 		../../opencv3_build/install/include/opencv2/core.hpp \
 		../../opencv3_build/install/include/opencv2/core/cvdef.h \
@@ -1675,7 +1680,6 @@ debug/mainwidget.o: mainwidget.cpp mainwidget.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qcommandlineparser.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qcoreapplication.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qcryptographichash.h \
-		../../Qt/5.10.1/mingw53_32/include/QtCore/qdatetime.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qdeadlinetimer.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qelapsedtimer.h \
 		../../Qt/5.10.1/mingw53_32/include/QtCore/qdiriterator.h \

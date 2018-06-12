@@ -8,6 +8,7 @@
 #include <QKeyEvent>
 #include <QtNetwork/QUdpSocket>
 #include <QFileDialog>
+#include <QTime>
 #include <fstream>
 
 #include <opencv2/imgproc.hpp>
@@ -46,6 +47,7 @@ private:
     bool isCaptured = false;
     bool isLoaded = false;
     bool isDrawing = false;
+    bool isDemo = false;
     bool autoMode;
 
     // Threads
@@ -72,6 +74,7 @@ private slots:
     void ButtonStartStopClicked();
     void ButtonSettingsClicked();
     void ButtonDrawClicked();
+    void ButtonDemoClicked();
     void ButtonCancelDrawClicked(); // Not this widget button
     void ButtonLoadClicked();
 

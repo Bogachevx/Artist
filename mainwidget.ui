@@ -29,9 +29,19 @@
      <height>601</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+    </font>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QPushButton" name="ButtonSettings">
+      <property name="font">
+       <font>
+        <family>Comic Sans MS</family>
+       </font>
+      </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
       </property>
@@ -55,6 +65,11 @@
     </item>
     <item>
      <widget class="QPushButton" name="ButtonStartStop">
+      <property name="font">
+       <font>
+        <family>Comic Sans MS</family>
+       </font>
+      </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
       </property>
@@ -80,6 +95,11 @@
      <widget class="QPushButton" name="ButtonCapture">
       <property name="enabled">
        <bool>false</bool>
+      </property>
+      <property name="font">
+       <font>
+        <family>Comic Sans MS</family>
+       </font>
       </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
@@ -107,6 +127,11 @@
       <property name="enabled">
        <bool>false</bool>
       </property>
+      <property name="font">
+       <font>
+        <family>Comic Sans MS</family>
+       </font>
+      </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
       </property>
@@ -130,6 +155,11 @@
     </item>
     <item>
      <widget class="Line" name="line">
+      <property name="font">
+       <font>
+        <family>Comic Sans MS</family>
+       </font>
+      </property>
       <property name="frameShadow">
        <enum>QFrame::Sunken</enum>
       </property>
@@ -145,9 +175,14 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="ButtonAutodraw">
+     <widget class="QPushButton" name="ButtonDemo">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
+      </property>
+      <property name="font">
+       <font>
+        <family>Comic Sans MS</family>
+       </font>
       </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
@@ -157,7 +192,7 @@
       </property>
       <property name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/res/icons/magicwand.ico</normaloff>:/res/icons/magicwand.ico</iconset>
+        <normaloff>:/res/icons/hourglass.ico</normaloff>:/res/icons/hourglass.ico</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -174,6 +209,11 @@
      <widget class="QPushButton" name="ButtonLoad">
       <property name="enabled">
        <bool>true</bool>
+      </property>
+      <property name="font">
+       <font>
+        <family>Comic Sans MS</family>
+       </font>
       </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
@@ -198,6 +238,11 @@
     </item>
     <item>
      <widget class="QPushButton" name="ButtonQuit">
+      <property name="font">
+       <font>
+        <family>Comic Sans MS</family>
+       </font>
+      </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
       </property>
@@ -230,8 +275,13 @@
      <height>681</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+    </font>
+   </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(206, 30, 37, 255);</string>
+    <string notr="true">background-color: rgb(163, 163, 163);</string>
    </property>
    <property name="text">
     <string/>
@@ -251,6 +301,11 @@
      <width>261</width>
      <height>86</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
@@ -366,6 +421,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>ButtonDemo</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWidget</receiver>
+   <slot>ButtonDemoClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>48</x>
+     <y>404</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-6</x>
+     <y>364</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ButtonSettingsClicked()</slot>
@@ -373,5 +444,6 @@
   <slot>ButtonCaptureClicked()</slot>
   <slot>ButtonStartStopClicked()</slot>
   <slot>ButtonLoadClicked()</slot>
+  <slot>ButtonDemoClicked()</slot>
  </slots>
 </ui>

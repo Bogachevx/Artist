@@ -15,3 +15,6 @@ Makefile.Debug
 Makefile.Release
 *.exe
 Makefile.Debug
+*.jpeg
+*.o
+*.exe

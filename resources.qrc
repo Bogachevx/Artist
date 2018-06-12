@@ -17,5 +17,6 @@
         <file>icons/flash.ico</file>
         <file>icons/magicwand.ico</file>
         <file>icons/robowizard__logo.ico</file>
+        <file>icons/hourglass.ico</file>
     </qresource>
 </RCC>

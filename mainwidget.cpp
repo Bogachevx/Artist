@@ -81,6 +81,7 @@ void MainWidget::ProcessImage()
         cv::Mat temp(Frame, getROIRect(&Frame));
         ROI = temp.clone();
     }
+    cv::imwrite("cap.jpg", ROI);
     if (ROI.cols > ROI.rows)
     {
         cv::rotate(ROI,ROI, cv::ROTATE_90_CLOCKWISE);
@@ -158,9 +159,44 @@ void MainWidget::keyPressEvent(QKeyEvent *e)
     {
     case Qt::Key_Return:
     {
+
         if (ui->ButtonCapture->isEnabled())
         {
             ButtonCaptureClicked();
+            break;
+        }
+        if (ui->ButtonDraw->isEnabled())
+        {
+            ButtonDrawClicked();
+            break;
+        }
+        break;
+    }
+    case Qt::Key_Space:
+    {
+        if (ui->ButtonStartStop->isEnabled())
+        {
+            ButtonStartStopClicked();
+        }
+        break;
+    }
+    case Qt::Key_F1:
+    {
+        ProgramSettings.activeRegionSize.Width = 550;
+        ProgramSettings.activeRegionSize.Height = 350;
+        break;
+    }
+    case Qt::Key_F2:
+    {
+        ProgramSettings.activeRegionSize.Width = 350;
+        ProgramSettings.activeRegionSize.Height = 450;
+        break;
+    }
+    case Qt::Key_Alt:
+    {
+        if (ui->ButtonDemo->isEnabled())
+        {
+            ButtonDemoClicked();
         }
         break;
     }
@@ -212,7 +248,6 @@ void MainWidget::ButtonCaptureClicked()
 {
     isCaptured = true;
     ButtonStartStopClicked();
-    cv::imwrite("cap.jpg", Frame);
     ProcessImage();
     ui->ButtonDraw->setEnabled(true);
 }
@@ -237,6 +272,7 @@ void MainWidget::ButtonStartStopClicked()
         ui->ButtonCapture->setEnabled(true);
         ui->ButtonDraw->setEnabled(false);
         ui->ButtonLoad->setEnabled(false);
+        ui->ButtonDemo->setEnabled(false);
     }
     else
     {
@@ -248,11 +284,12 @@ void MainWidget::ButtonStartStopClicked()
         camera->wait();
 
         delete(camera);
-        qDebug() << camera->isRunning();
+        //qDebug() << camera->isRunning();
         camera = nullptr;
 
         ui->ButtonStartStop->setIcon(QIcon(":res/icons/play.ico"));
         ui->ButtonCapture->setEnabled(false);
+        ui->ButtonDemo->setEnabled(true);
         ui->ButtonLoad->setEnabled(true);
     }
     isStarted = !isStarted;
@@ -282,15 +319,79 @@ void MainWidget::ButtonSettingsClicked()
 
 void MainWidget::ButtonDrawClicked()
 {
-        dp = new DrawProcess();
+    if (isDrawing)
+    {
+        pointsSender->stop();
+        pointsSender->wait();
+        QThread::msleep(100);
+        delete(pointsSender);
+        UDP_Send(QByteArray::number(-10));
+        UDP_Send(QByteArray::number(-10));
+        ui->ButtonDraw->setIcon(QIcon(":res/icons/paintbrush2.ico"));
+        ui->ButtonSettings->setEnabled(true);
+        ui->ButtonStartStop->setEnabled(true);
+        ui->ButtonDemo->setEnabled(true);
+        ui->ButtonLoad->setEnabled(true);
+        ui->ButtonQuit->setEnabled(true);
+    }
+    else
+    {
+        QTime Ti;
+        Ti = QTime::currentTime();
+        QString timestr;
+        if (!QDir("pics").exists())
+        {
+            QDir().mkdir("pics");
+        }
+        timestr = "pics/" + Ti.toString() + ".jpeg";
+        timestr.replace(":", " ");
+        cv::imwrite(timestr.toStdString(), Frame);
         UDP_Send(QByteArray::number(-3));
         pointsSender = new PointsSender(Contours);
         pointsSender->start();
 
-        connect(pointsSender, SIGNAL(sendPercent(int)), dp, SLOT(setProgressBarValue(int)));
-        connect(dp, SIGNAL(CancelDraw()), this, SLOT(ButtonCancelDrawClicked()));
-        dp->show();
-        isDrawing = true;
+        ui->ButtonDraw->setIcon(QIcon(":res/icons/denied.ico"));
+        ui->ButtonSettings->setEnabled(false);
+        ui->ButtonStartStop->setEnabled(false);
+        ui->ButtonDemo->setEnabled(false);
+        ui->ButtonLoad->setEnabled(false);
+        ui->ButtonQuit->setEnabled(false);
+    }
+    isDrawing = !isDrawing;
+        //dp = new DrawProcess();
+        //UDP_Send(QByteArray::number(-3));
+        //pointsSender = new PointsSender(Contours);
+        //pointsSender->start();
+
+        //connect(pointsSender, SIGNAL(sendPercent(int)), dp, SLOT(setProgressBarValue(int)));
+        //connect(dp, SIGNAL(CancelDraw()), this, SLOT(ButtonCancelDrawClicked()));
+        //dp->show();
+        //isDrawing = true;
+}
+
+void MainWidget::ButtonDemoClicked()
+{
+    if (isDemo)
+    {
+        UDP_Send(QByteArray::number(-2));
+        ui->ButtonDemo->setIcon(QIcon(":res/icons/hourglass.ico"));
+        ui->ButtonStartStop->setEnabled(true);
+        ui->ButtonLoad->setEnabled(true);
+        ui->ButtonSettings->setEnabled(true);
+        ui->ButtonQuit->setEnabled(true);
+    }
+    else
+    {
+        UDP_Send(QByteArray::number(-20));
+        ui->ButtonDemo->setIcon(QIcon(":res/icons/denied.ico"));
+        ui->ButtonStartStop->setEnabled(false);
+        ui->ButtonDraw->setEnabled(false);
+        ui->ButtonCapture->setEnabled(false);
+        ui->ButtonLoad->setEnabled(false);
+        ui->ButtonSettings->setEnabled(false);
+        ui->ButtonQuit->setEnabled(false);
+    }
+    isDemo = !isDemo;
 }
 
 void MainWidget::ButtonCancelDrawClicked()
@@ -308,6 +409,7 @@ void MainWidget::ButtonCancelDrawClicked()
 
 void MainWidget::ButtonLoadClicked()
 {
+    UDP_Send(QByteArray::number(-2));
     QString str = QFileDialog::getOpenFileName(0, "Open Dialog", "", "*.jpeg *.jpg *.png");
     Frame = cv::imread(str.toStdString(), cv::IMREAD_GRAYSCALE);
     if (Frame.empty())
