@@ -1,6 +1,6 @@
 #include <windows.h>
 
-IDI_ICON1	ICON	DISCARDABLE	"C:\\Projects\\FaceDraw\\icons\\flash.ico"
+IDI_ICON1	ICON	DISCARDABLE	"C:\\Projects\\Artist\\icons\\flash.ico"
 
 VS_VERSION_INFO VERSIONINFO
 	FILEVERSION 1,0,0,0
@@ -23,7 +23,7 @@ VS_VERSION_INFO VERSIONINFO
 				VALUE "FileDescription", "PC program for painting by using Kawasaki robots\0"
 				VALUE "FileVersion", "1.0.0.0\0"
 				VALUE "LegalCopyright", "Bogachev Dmitrii\0"
-				VALUE "OriginalFilename", "FaceDraw.exe\0"
+				VALUE "OriginalFilename", "Artist.exe\0"
 				VALUE "ProductName", "Painter\0"
 				VALUE "ProductVersion", "1.0.0.0\0"
 			END

@@ -12,7 +12,7 @@ win32:{
     QMAKE_TARGET_COPYRIGHT = "Bogachev Dmitrii"
 }
 
-TARGET = FaceDraw
+TARGET = Artist
 TEMPLATE = app
 requires(qtConfig(udpsocket))
 DEFINES += QT_DEPRECATED_WARNINGS
