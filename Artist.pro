@@ -36,21 +36,18 @@ SOURCES += \
     mainwidget.cpp \
     settings.cpp \
     camerathread.cpp \
-    pointssender.cpp \
-    drawprocess.cpp
+    pointssender.cpp
 
 HEADERS += \
     mainwidget.h \
     settings.h \
     structs.h \
     camerathread.h \
-    pointssender.h \
-    drawprocess.h
+    pointssender.h
 
 FORMS += \
     mainwidget.ui \
-    settings.ui \
-    drawprocess.ui
+    settings.ui
 
 RESOURCES += \
     resources.qrc

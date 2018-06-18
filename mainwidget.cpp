@@ -6,7 +6,7 @@ MainWidget::MainWidget(QWidget *parent) :
     ui(new Ui::MainWidget)
 {
     ui->setupUi(this);
-    LoadSettings();
+    LoadSettings("settings.dat");
     isStarted = false;
     isCaptured = false;
     udpSocket = new QUdpSocket();
@@ -24,9 +24,9 @@ MainWidget::~MainWidget()
     delete ui;
 }
 
-void MainWidget::LoadSettings()
+void MainWidget::LoadSettings(QString filename)
 {
-    std::ifstream fin("settings.dat");
+    std::ifstream fin(filename.toStdString());
 
     fin >> ProgramSettings.cameraAddress >>
         ProgramSettings.cameraResolution.Width >>
@@ -358,15 +358,7 @@ void MainWidget::ButtonDrawClicked()
         ui->ButtonQuit->setEnabled(false);
     }
     isDrawing = !isDrawing;
-        //dp = new DrawProcess();
-        //UDP_Send(QByteArray::number(-3));
-        //pointsSender = new PointsSender(Contours);
-        //pointsSender->start();
 
-        //connect(pointsSender, SIGNAL(sendPercent(int)), dp, SLOT(setProgressBarValue(int)));
-        //connect(dp, SIGNAL(CancelDraw()), this, SLOT(ButtonCancelDrawClicked()));
-        //dp->show();
-        //isDrawing = true;
 }
 
 void MainWidget::ButtonDemoClicked()
@@ -397,9 +389,7 @@ void MainWidget::ButtonDemoClicked()
 void MainWidget::ButtonCancelDrawClicked()
 {
     pointsSender->stop();
-    dp->close();
     QThread::msleep(100);
-    delete(dp);
     delete(pointsSender);   
     UDP_Send(QByteArray::number(-10));
     UDP_Send(QByteArray::number(-10));

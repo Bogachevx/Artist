@@ -14,7 +14,6 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
 
-#include "drawprocess.h"
 #include "camerathread.h"
 #include "structs.h"
 #include "settings.h"
@@ -36,7 +35,6 @@ private:
     Ui::MainWidget *ui;
     // Widgets
     Settings *SettingsWindow;
-    DrawProcess *dp;
 
     // OpenCV
     cv::Mat Frame;
@@ -59,7 +57,7 @@ private:
 
     cv::Rect getROIRect(cv::Mat *frame);
     cv::Rect cutRect(cv::Rect rect);
-    void LoadSettings();
+    void LoadSettings(QString filename);
     void ProcessImage();
     void UDP_Send(QByteArray datagram);
 

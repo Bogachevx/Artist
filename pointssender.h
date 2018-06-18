@@ -10,8 +10,6 @@
 #include <QtNetwork/QUdpSocket>
 #include <opencv2/core.hpp>
 
-#include "drawprocess.h"
-
 class PointsSender : public QThread
 {
     Q_OBJECT
